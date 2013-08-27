@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Music Collection</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <script type="text/x-handlebars">
+    <ul>
+      {{#each App.Songs}}
+        <li>{{title}} by {{artist}}</li>
+      {{/each}}
+    </ul>
+  </script>
+  <script src="js/libs/handlebars-1.0.0.js"></script>
+  <script src="js/libs/jquery-1.9.1.js"></script>
+  <script src="js/libs/ember-1.0.0-rc.7.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
