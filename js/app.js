@@ -6,7 +6,13 @@ App.Song = Ember.Object.extend({
   artist: null
 });
 
-App.Songs = Ember.A();
+App.SongCollection = Ember.ArrayProxy.extend(Ember.SortableMixin, {
+  sortProperties: ['rating'],
+  sortAscending: false,
+  content: []
+});
+
+App.Songs = App.SongCollection.create();
 
 App.Songs.pushObject(App.Song.create({ title: 'Black Dog', artist: 'Led Zeppelin', rating: 8 }));
 App.Songs.pushObject(App.Song.create({ title: 'Yellow Ledbetter', artist: 'Pearl Jam', rating: 10 }));
