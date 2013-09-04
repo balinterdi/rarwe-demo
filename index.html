@@ -15,20 +15,24 @@
         <h1>Rock & Roll<small> with Ember.js</small></h1>
       </div>
       <div class="row">
-        <div class="col-md-4">
-          <div class="list-group">
-            {{#each App.Artists}}
-              <a href="#" class="list-group-item">{{name}}</a>
-            {{/each}}
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="list-group">
-            <div class="list-group-item empty-list">
-              <div class="empty-message">
-                Select an artist.
-              </div>
-            </div>
+        {{outlet}}
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="artists">
+    <div class="col-md-4">
+      <div class="list-group">
+        {{#each model}}
+        <a href="#" class="list-group-item">{{name}}</a>
+        {{/each}}
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="list-group">
+        <div class="list-group-item empty-list">
+          <div class="empty-message">
+            Select an artist.
           </div>
         </div>
       </div>
