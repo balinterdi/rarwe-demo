@@ -30,14 +30,27 @@
     </div>
     <div class="col-md-8">
       <div class="list-group">
-        <div class="list-group-item empty-list">
-          <div class="empty-message">
-            Select an artist.
-          </div>
-        </div>
+        {{outlet}}
       </div>
     </div>
   </script>
+
+  <script type="text/x-handlebars" data-template-name="artists/index">
+    <div class="list-group-item empty-list">
+      <div class="empty-message">
+        Select an artist.
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="artists/songs">
+    {{#each songs}}
+      <div class="list-group-item">
+        {{title}}
+      </div>
+    {{/each}}
+  </script>
+
   <script src="js/libs/jquery-1.9.1.js"></script>
   <script src="js/libs/handlebars-1.0.0.js"></script>
   <script src="js/libs/ember-1.0.0.js"></script>

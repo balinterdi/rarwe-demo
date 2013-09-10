@@ -47,7 +47,9 @@ App.Songs.pushObject(App.Song.create({ title: 'Best of You', artist: 'Foo Fighte
 App.Songs.pushObject(App.Song.create({ title: 'Always Waiting', artist: 'Kaya Project', rating: 10 }));
 
 App.Router.map(function() {
-  this.route('artists');
+  this.resource('artists', function() {
+    this.route('songs', { path: ':slug' });
+  });
 });
 
 App.ArtistsRoute = Ember.Route.extend({
@@ -55,3 +57,10 @@ App.ArtistsRoute = Ember.Route.extend({
     return App.Artists;
   }
 });
+
+App.ArtistsSongsRoute = Ember.Route.extend({
+  model: function(params) {
+    return App.Artists.findProperty('slug', params.slug);
+  }
+});
+
