@@ -24,7 +24,9 @@
     <div class="col-md-4">
       <div class="list-group">
         {{#each model}}
-        <a href="#" class="list-group-item">{{name}}</a>
+          {{#link-to "artists.songs" this class="list-group-item"}}
+            {{name}}
+          {{/link-to}}
         {{/each}}
       </div>
     </div>
