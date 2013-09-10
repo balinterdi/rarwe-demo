@@ -1,7 +1,15 @@
 App = Ember.Application.create();
 
 App.Artist = Ember.Object.extend({
-  name: null
+  name: null,
+
+  slug: function() {
+    return this.get('name').dasherize();
+  }.property('name'),
+
+  songs: function() {
+    return App.Songs.filterProperty('artist', this.get('name'));
+  }.property('name', 'App.Songs.@each.artist')
 });
 
 App.Song = Ember.Object.extend({
