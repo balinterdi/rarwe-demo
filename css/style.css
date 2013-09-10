@@ -2,3 +2,24 @@
 html, body {
     margin: 20px;
 }
+
+.empty-list {
+  min-height: 100px;
+  text-align: center;
+}
+
+.empty-list .empty-message {
+  display: inline-block;
+  color: #555;
+  line-height: 100px;
+}
+
+.artist-link .pointer {
+  float: right;
+  display: none;
+}
+
+.artist-link.active .pointer {
+  display: block;
+}
+

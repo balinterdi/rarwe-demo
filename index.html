@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/application.css">
 </head>
 <body>
   <script type="text/x-handlebars">
@@ -24,8 +23,9 @@
     <div class="col-md-4">
       <div class="list-group">
         {{#each model}}
-          {{#link-to "artists.songs" this class="list-group-item"}}
+          {{#link-to "artists.songs" this class="list-group-item artist-link"}}
             {{name}}
+            <span class="pointer glyphicon glyphicon-chevron-right"></span>
           {{/link-to}}
         {{/each}}
       </div>
