@@ -27,3 +27,19 @@ html, body {
   display: block;
 }
 
+.new-artist {
+  width: 82%;
+}
+
+.new-artist-button {
+  float: right;
+  padding: 3px 10px;
+}
+
+.new-song {
+  width: 50%;
+}
+
+.new-song-button {
+  margin-left: 20px;
+}

@@ -21,9 +21,17 @@
     </div>
   </script>
 
+  <script type="text/x-handlebars" data-template-name="new-artist">
+    <div class="list-group-item">
+      {{input type="text" class="new-artist" placeholder="New Artist" value=newName }}
+      <button class="btn btn-primary btn-sm new-artist-button" {{action "createArtist"}}>Add</button>
+    </div>
+  </script>
+
   <script type="text/x-handlebars" data-template-name="artists">
     <div class="col-md-4">
       <div class="list-group">
+        {{partial "new-artist"}}
         {{#each model}}
           {{#link-to "artists.songs" this class="list-group-item artist-link"}}
             {{name}}
