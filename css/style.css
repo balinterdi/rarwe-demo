@@ -3,6 +3,10 @@ html, body {
     margin: 20px;
 }
 
+.page-header a h1 {
+  color: #555;
+}
+
 .empty-list {
   min-height: 100px;
   text-align: center;
