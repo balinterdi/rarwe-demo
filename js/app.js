@@ -103,19 +103,32 @@ App.StarRating = Ember.View.extend({
   }.property('numStars', 'fullStars'),
 
   fullStarRatings: function() {
-    return this.range(this.get('emptyStars') + 1, this.get('numStars') + 1)
+    return this.values(this.get('emptyStars') + 1, this.get('numStars'), this.get('numStars'))
   }.property('emptyStars', 'numStars'),
 
   emptyStarRatings: function() {
-    return this.range(0, this.get('emptyStars'));
-  }.property('emptyStars'),
+    return this.values(1, this.get('emptyStars'), this.get('numStars'));
+  }.property('emptyStars', 'numStars'),
+
+  values: function(start, end, max) {
+    return this.range(start, end).map(function(i) {
+      return max - i + 1;
+    });
+  },
 
   range: function(start, end) {
     var range = [];
-    for (i = start; i < end; i++) {
+    for (i = start; i <= end; i++) {
       range.push(i);
     };
     return range;
+  },
+
+  actions: {
+    setRating: function() {
+      var newRating = $(event.target).data('rating');
+      this.get('context').set('rating', newRating);
+    }
   }
 });
 

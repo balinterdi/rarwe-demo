@@ -72,10 +72,10 @@
 
   <script type="text/x-handlebars" data-template-name="star-rating">
     {{#each view.emptyStarRatings}}
-      <span class="rating-star glyphicon glyphicon-star-empty" {{bind-attr data-rating=this}}></span>
+      <span class="rating-star glyphicon glyphicon-star-empty" {{bind-attr data-rating=this}} {{action "setRating" target=view}}></span>
     {{/each}}
     {{#each view.fullStarRatings}}
-      <span class="rating-star glyphicon glyphicon-star" {{bind-attr data-rating=this}}></span>
+      <span class="rating-star glyphicon glyphicon-star" {{bind-attr data-rating=this}} {{action "setRating" target=view}}></span>
     {{/each}}
   </script>
 
