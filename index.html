@@ -59,7 +59,7 @@
     {{#each songs}}
       <div class="list-group-item">
         {{title}}
-        {{view App.StarRating}}
+        {{view App.StarRating maxRating="10"}}
       </div>
     {{else}}
       <div class="list-group-item empty-list">
@@ -71,7 +71,7 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="star-rating">
-    {{rating}}
+    {{view.fullStars}}
   </script>
 
   <script src="js/libs/jquery-1.9.1.js"></script>
