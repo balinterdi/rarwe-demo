@@ -87,3 +87,10 @@ App.ArtistsSongsRoute = Ember.Route.extend({
   }
 });
 
+App.StarRating = Ember.View.extend({
+  tagName: 'span',
+  numStars: 5,
+  classNames: ['rating-star'],
+  templateName: 'star-rating'
+});
+

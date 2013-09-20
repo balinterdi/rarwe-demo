@@ -43,3 +43,8 @@ html, body {
 .new-song-button {
   margin-left: 20px;
 }
+
+.rating-star {
+  float: right;
+  margin-left: 3px;
+}
