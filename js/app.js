@@ -89,20 +89,33 @@ App.ArtistsSongsRoute = Ember.Route.extend({
 
 App.StarRating = Ember.View.extend({
   tagName: 'span',
-  classNames: ['rating-star'],
   templateName: 'star-rating',
   rating: Ember.computed.alias('context.rating'),
 
   numStars: function() {
-    return Math.ceil(this.get('maxRating') / 2);
+    return parseInt(this.get('maxRating'));
   }.property('maxRating'),
 
-  fullStars: function() {
-    return Math.ceil(this.get('rating') / 2);
-  }.property('rating'),
+  fullStars: Ember.computed.alias('rating'),
 
   emptyStars: function() {
     return this.get('numStars') - this.get('fullStars');
-  }.property('numStars', 'fullStars')
+  }.property('numStars', 'fullStars'),
+
+  fullStarRatings: function() {
+    return this.range(this.get('emptyStars') + 1, this.get('numStars') + 1)
+  }.property('emptyStars', 'numStars'),
+
+  emptyStarRatings: function() {
+    return this.range(0, this.get('emptyStars'));
+  }.property('emptyStars'),
+
+  range: function(start, end) {
+    var range = [];
+    for (i = start; i < end; i++) {
+      range.push(i);
+    };
+    return range;
+  }
 });
 
