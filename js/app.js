@@ -75,6 +75,15 @@ App.ArtistsRoute = Ember.Route.extend({
 App.ArtistsSongsRoute = Ember.Route.extend({
   model: function(params) {
     return App.Artists.findProperty('slug', params.slug);
+  },
+  actions: {
+    createSong: function() {
+      var artist = this.controller.get('model.name');
+      var title = this.controller.get('newTitle');
+      var song = App.Song.create({ title: title, artist: artist });
+      App.Songs.pushObject(song);
+      this.controller.set('newTitle', '');
+    }
   }
 });
 
