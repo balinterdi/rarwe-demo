@@ -87,6 +87,13 @@ App.ArtistsSongsRoute = Ember.Route.extend({
   }
 });
 
+App.ArtistsController = Ember.ArrayController.extend({
+  newName: '',
+  disabled: function() {
+    return Ember.isEmpty(this.get('newName'));
+  }.property('newName')
+});
+
 App.StarRating = Ember.View.extend({
   classNames: ['rating-panel'],
   templateName: 'star-rating',

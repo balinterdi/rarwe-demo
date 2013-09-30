@@ -26,7 +26,7 @@
       <div class="list-group">
         <div class="list-group-item">
           {{input type="text" class="new-artist" placeholder="New Artist" value=newName }}
-          <button class="btn btn-primary btn-sm new-artist-button" {{action "createArtist"}}>Add</button>
+          <button class="btn btn-primary btn-sm new-artist-button" {{action "createArtist"}} {{bind-attr disabled=disabled}}>Add</button>
         </div>
         {{#each model}}
           {{#link-to "artists.songs" this class="list-group-item artist-link"}}
