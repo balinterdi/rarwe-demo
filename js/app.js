@@ -92,26 +92,24 @@ App.StarRating = Ember.View.extend({
   templateName: 'star-rating',
   rating: Ember.computed.alias('context.rating'),
 
-  numStars:  Ember.computed.alias('maxRating'),
   fullStars: Ember.computed.alias('rating'),
-  emptyStars: function() {
-    return this.get('numStars') - this.get('fullStars');
+  numStars:  Ember.computed.alias('maxRating'),
+
+  stars: function() {
+    var ratings = [];
+    var fullStars = this.starRange(1, this.get('fullStars'), 'full');
+    var emptyStars = this.starRange(this.get('fullStars') + 1, this.get('numStars'), 'empty');
+    Array.prototype.push.apply(ratings, fullStars);
+    Array.prototype.push.apply(ratings, emptyStars);
+    return ratings;
   }.property('fullStars', 'numStars'),
 
-  fullStarRatings: function() {
-    return this.range(1, this.get('fullStars'));
-  }.property('fullStars'),
-
-  emptyStarRatings: function() {
-    return this.range(this.get('fullStars') + 1, this.get('numStars'))
-  }.property('fullStars', 'numStars'),
-
-  range: function(start, end) {
-    var range = [];
+  starRange: function(start, end, type) {
+    var starsData = [];
     for (i = start; i <= end; i++) {
-      range.push(i);
+      starsData.push({ rating: i, full: type === 'full' });
     };
-    return range;
+    return starsData;
   },
 
   actions: {

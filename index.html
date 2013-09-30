@@ -71,11 +71,11 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="star-rating">
-    {{#each view.fullStarRatings}}
-      <span class="rating-star glyphicon glyphicon-star" {{bind-attr data-rating=this}} {{action "setRating" target=view}}></span>
-    {{/each}}
-    {{#each view.emptyStarRatings}}
-      <span class="rating-star glyphicon glyphicon-star-empty" {{bind-attr data-rating=this}} {{action "setRating" target=view}}></span>
+    {{#each view.stars}}
+      <span {{bind-attr data-rating=rating}}
+        {{bind-attr class=":star-rating :glyphicon full:glyphicon-star:glyphicon-star-empty"}}
+        {{action "setRating" target=view}}>
+      </span>
     {{/each}}
   </script>
 
