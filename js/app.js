@@ -68,6 +68,7 @@ App.ArtistsRoute = Ember.Route.extend({
       var artist = App.Artist.create({ name: name });
       App.Artists.pushObject(artist);
       this.get('controller').set('newName', '');
+      this.transitionTo('artists.songs', artist);
     }
   }
 });
