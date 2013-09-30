@@ -94,6 +94,12 @@ App.ArtistsController = Ember.ArrayController.extend({
   }.property('newName')
 });
 
+App.ArtistsSongsController = Ember.ObjectController.extend({
+  placeholderText: function() {
+    return "New " + this.get('name') + " song";
+  }.property('name')
+});
+
 App.StarRating = Ember.View.extend({
   classNames: ['rating-panel'],
   templateName: 'star-rating',

@@ -53,7 +53,7 @@
 
   <script type="text/x-handlebars" data-template-name="artists/songs">
     <div class="list-group-item">
-      {{input type="text" class="new-artist" placeholder="New Song" value=newTitle }}
+      {{input type="text" class="new-artist" placeholder=placeholderText value=newTitle }}
       <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}}>Add</button>
     </div>
     {{#each songs}}
