@@ -95,9 +95,20 @@ App.ArtistsController = Ember.ArrayController.extend({
 });
 
 App.ArtistsSongsController = Ember.ObjectController.extend({
+  createMode: 'nudge',
   placeholderText: function() {
     return "New " + this.get('name') + " song";
-  }.property('name')
+  }.property('name'),
+
+  canCreate: function() {
+    return this.get('songs.length') > 0 || this.get('createMode') === 'create';
+  }.property('songs.length', 'createMode'),
+
+  actions: {
+    createMode: function(mode) {
+      this.set('createMode', mode);
+    }
+  }
 });
 
 App.StarRating = Ember.View.extend({
