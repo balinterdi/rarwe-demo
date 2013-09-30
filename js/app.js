@@ -73,6 +73,9 @@ App.ArtistsRoute = Ember.Route.extend({
 });
 
 App.ArtistsSongsRoute = Ember.Route.extend({
+  beforeModel: function() {
+    this.controllerFor(this.get('routeName')).set('createMode', 'nudge');
+  },
   model: function(params) {
     return App.Artists.findProperty('slug', params.slug);
   },
