@@ -28,11 +28,11 @@ html, body {
 }
 
 .new-artist {
-  width: 82%;
+  width: 70%;
 }
 
 .new-artist-button {
-  float: right;
+  margin-left: 2em;
   padding: 3px 10px;
 }
 
