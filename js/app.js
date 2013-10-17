@@ -7,9 +7,9 @@ App.Artist = Ember.Object.extend({
     return this.get('name').dasherize();
   }.property('name'),
 
-  songs: function() {
-    return App.Songs.filterProperty('artist', this.get('name'));
-  }.property('name', 'App.Songs.@each.artist')
+  // songs: function() {
+  //   return App.Songs.filterProperty('artist', this.get('name'));
+  // }.property('name', 'App.Songs.@each.artist')
 });
 
 App.Song = Ember.Object.extend({
@@ -17,34 +17,6 @@ App.Song = Ember.Object.extend({
   rating: null,
   artist: null
 });
-
-var artistNames = ['Pearl Jam', 'Led Zeppelin', 'Foo Fighters', 'Kaya Project', 'Radiohead', 'Red Hot Chili Peppers']
-App.Artists = artistNames.map(function(name) { return App.Artist.create({ name: name }); })
-
-App.Songs = Ember.A();
-
-// Pearl Jam songs
-App.Songs.pushObject(App.Song.create({ title: 'Yellow Ledbetter', artist: 'Pearl Jam', rating: 5 }));
-App.Songs.pushObject(App.Song.create({ title: 'Animal', artist: 'Pearl Jam', rating: 4 }));
-App.Songs.pushObject(App.Song.create({ title: 'Daughter', artist: 'Pearl Jam', rating: 5 }));
-App.Songs.pushObject(App.Song.create({ title: 'State of Love and Trust', artist: 'Pearl Jam', rating: 5 }));
-App.Songs.pushObject(App.Song.create({ title: 'Immortality', artist: 'Pearl Jam', rating: 3 }));
-App.Songs.pushObject(App.Song.create({ title: 'Alive', artist: 'Pearl Jam', rating: 3 }));
-App.Songs.pushObject(App.Song.create({ title: 'Given To Fly', artist: 'Pearl Jam', rating: 3 }));
-App.Songs.pushObject(App.Song.create({ title: 'Inside Job', artist: 'Pearl Jam', rating: 4 }));
-
-// Led Zeppelin songs
-App.Songs.pushObject(App.Song.create({ title: 'Black Dog', artist: 'Led Zeppelin', rating: 4 }));
-App.Songs.pushObject(App.Song.create({ title: 'Achilles Last Stand', artist: 'Led Zeppelin', rating: 5 }));
-App.Songs.pushObject(App.Song.create({ title: 'Immigrant Song', artist: 'Led Zeppelin', rating: 4}));
-App.Songs.pushObject(App.Song.create({ title: 'Whole Lotta Love', artist: 'Led Zeppelin', rating: 4}));
-
-// Foo Fighters songs
-App.Songs.pushObject(App.Song.create({ title: 'The Pretender', artist: 'Foo Fighters', rating: 3 }));
-App.Songs.pushObject(App.Song.create({ title: 'Best of You', artist: 'Foo Fighters', rating: 5 }));
-
-// Kaya Project songs
-App.Songs.pushObject(App.Song.create({ title: 'Always Waiting', artist: 'Kaya Project', rating: 5 }));
 
 App.Router.map(function() {
   this.resource('artists', function() {
@@ -60,7 +32,7 @@ App.IndexRoute = Ember.Route.extend({
 
 App.ArtistsRoute = Ember.Route.extend({
   model: function() {
-    return App.Artists;
+    return Ember.$.getJSON('http://localhost:9393/artists.json');
   },
   actions: {
     createArtist: function() {
