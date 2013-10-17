@@ -36,9 +36,18 @@ App.ArtistsRoute = Ember.Route.extend({
   },
   actions: {
     createArtist: function() {
+      var route = this;
       var name = this.get('controller').get('newName');
       var artist = App.Artist.create({ name: name });
-      App.Artists.pushObject(artist);
+
+      var artistPromise = Ember.$.ajax('http://localhost:9393/artists.json', {
+        type: 'POST',
+        headers: { 'Accept': 'application/json' },
+        data: { name: name }
+      });
+      artistPromise.then(function() {
+        route.modelFor('artists').pushObject(artist);
+      });
       this.get('controller').set('newName', '');
       this.transitionTo('artists.songs', artist);
     }
