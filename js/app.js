@@ -32,7 +32,16 @@ App.IndexRoute = Ember.Route.extend({
 
 App.ArtistsRoute = Ember.Route.extend({
   model: function() {
-    return Ember.$.getJSON('http://localhost:9393/artists.json');
+    return Ember.RSVP.Promise(function(resolve, reject) {
+      Ember.$.getJSON('http://localhost:9393/artists.json').then(function(artists) {
+        var artistObjects = [];
+        artists.forEach(function(artist) {
+          var record = App.Artist.create({ name: artist.name });
+          artistObjects.push(record);
+        });
+        resolve(artistObjects);
+      });
+    });
   },
   actions: {
     createArtist: function() {
