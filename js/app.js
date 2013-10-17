@@ -74,9 +74,6 @@ App.ArtistsRoute = Ember.Route.extend({
 });
 
 App.ArtistsSongsRoute = Ember.Route.extend({
-  beforeModel: function() {
-    this.controllerFor(this.get('routeName')).set('createMode', 'nudge');
-  },
   model: function(params) {
     return App.Artists.findProperty('slug', params.slug);
   },
@@ -87,30 +84,6 @@ App.ArtistsSongsRoute = Ember.Route.extend({
       var song = App.Song.create({ title: title, artist: artist });
       App.Songs.pushObject(song);
       this.controller.set('newTitle', '');
-    }
-  }
-});
-
-App.ArtistsController = Ember.ArrayController.extend({
-  newName: '',
-  disabled: function() {
-    return Ember.isEmpty(this.get('newName'));
-  }.property('newName')
-});
-
-App.ArtistsSongsController = Ember.ObjectController.extend({
-  createMode: 'nudge',
-  placeholderText: function() {
-    return "New " + this.get('name') + " song";
-  }.property('name'),
-
-  canCreate: function() {
-    return this.get('songs.length') > 0 || this.get('createMode') === 'create';
-  }.property('songs.length', 'createMode'),
-
-  actions: {
-    createMode: function(mode) {
-      this.set('createMode', mode);
     }
   }
 });
@@ -146,5 +119,27 @@ App.StarRating = Ember.View.extend({
       this.set('rating', newRating);
     }
   }
+});
+
+App.ArtistsController = Ember.ArrayController.extend({
+  newName: '',
+  disabled: function() {
+    return Ember.isEmpty(this.get('newName'));
+  }.property('newName')
+});
+
+App.ArtistsSongsController = Ember.ObjectController.extend({
+  newSongPlaceholder: function() {
+    return 'New ' + this.get('name') + ' song';
+  }.property('name'),
+
+  canCreateSong: false,
+
+  actions: {
+    enableSongCreation: function() {
+      this.set('canCreateSong', true);
+    }
+  }
+
 });
 

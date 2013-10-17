@@ -26,7 +26,8 @@
       <div class="list-group">
         <div class="list-group-item">
           {{input type="text" class="new-artist" placeholder="New Artist" value=newName }}
-          <button class="btn btn-primary btn-sm new-artist-button" {{action "createArtist"}} {{bind-attr disabled=disabled}}>Add</button>
+          <button class="btn btn-primary btn-sm new-artist-button" {{action "createArtist"}}
+            {{bind-attr disabled=disabled}}>Add</button>
         </div>
         {{#each model}}
           {{#link-to "artists.songs" this class="list-group-item artist-link"}}
@@ -52,9 +53,9 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="artists/songs">
-    {{#if canCreate}}
+    {{#if canCreateSong}}
       <div class="list-group-item">
-        {{input type="text" class="new-artist" placeholder=placeholderText value=newTitle }}
+        {{input type="text" class="new-artist" placeholder=newSongPlaceholder value=newTitle }}
         <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}}>Add</button>
       </div>
     {{/if}}
@@ -64,11 +65,10 @@
         {{view App.StarRating maxRating=5}}
       </div>
     {{else}}
-      {{#unless canCreate}}
+      {{#unless canCreateSong}}
         <div class="list-group-item empty-list">
           <div class="empty-message">
-            There are no {{name}} songs. Why don't you
-            <a href="#" {{action "createMode" "create"}}>create one?</a>
+            There are no {{name}} songs. Why don't you <a href="#" {{action enableSongCreation}}>create one?</a>
           </div>
         </div>
       {{/unless}}
