@@ -20,46 +20,25 @@
             <input type="text" class="new-artist" placeholder="New Artist" />
             <button class="btn btn-primary btn-sm new-artist-button">Add</button>
           </div>
-          <a href="#" class="list-group-item active">Pearl Jam  <span class="glyphicon glyphicon-chevron-right" style="float:right"></span></a>
+          <a href="#" class="list-group-item">Pearl Jam</span></a>
           <a href="#" class="list-group-item">Led Zeppelin</a>
           <a href="#" class="list-group-item">Foo Fighters</a>
           <a href="#" class="list-group-item">Kaya Project</a>
-          <a href="#" class="list-group-item">Radiohead</a>
+          <a href="#" class="list-group-item active">Radiohead <span class="glyphicon glyphicon-chevron-right" style="float:right"></a>
           <a href="#" class="list-group-item">Red Hot Chili Peppers</a>
         </div>
       </div>
       <div class="col-md-8">
         <div class="list-group">
-          <div class="list-group-item">
-            <input type="text" class="new-song" placeholder="New song" />
+          <div class="list-group-item" id="new-song-panel" style="display:none">
+            <input type="text" class="new-song" placeholder="New Radiohead song" />
             <button class="btn btn-primary btn-sm new-song-button">Add</button>
           </div>
-          <a href="#" class="list-group-item">Yellow ledbetter
-            <div class="rating-panel">
-              <span class="rating-star glyphicon glyphicon-star" data-rating="2"></span>
-              <span class="rating-star glyphicon glyphicon-star" data-rating="4"></span>
-              <span class="rating-star glyphicon glyphicon-star" data-rating="6"></span>
-              <span class="rating-star glyphicon glyphicon-star" data-rating="8"></span>
-              <span class="rating-star glyphicon glyphicon-star-empty" data-rating="10"></span>
+          <div class="list-group-item empty-list">
+            <div class="empty-message">
+              There are no Radiohead songs. Why don't you <a href="#" id="create-song-link">create one?</a>
             </div>
-          </a>
-          <a href="#" class="list-group-item">Animal
-            <div class="rating-panel">
-              <span class="rating-star glyphicon glyphicon-star" data-rating="2"></span>
-              <span class="rating-star glyphicon glyphicon-star" data-rating="4"></span>
-              <span class="rating-star glyphicon glyphicon-star" data-rating="6"></span>
-              <span class="rating-star glyphicon glyphicon-star-empty" data-rating="8"></span>
-              <span class="rating-star glyphicon glyphicon-star-empty" data-rating="10"></span>
-            </div>
-          </a>
-          <a href="#" class="list-group-item">State of love and trust</a>
-          <a href="#" class="list-group-item">Daughter</a>
-          <a href="#" class="list-group-item">Immortality</a>
-          <a href="#" class="list-group-item">Alive</a>
-          <a href="#" class="list-group-item">Given to fly</a>
-          <a href="#" class="list-group-item">Do the evolution</a>
-          <a href="#" class="list-group-item">I am mine</a>
-          <a href="#" class="list-group-item">Inside Job</a>
+          </div>
         </div>
       </div>
     </div>
