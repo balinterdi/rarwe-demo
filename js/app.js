@@ -47,9 +47,11 @@ App.ArtistsRoute = Ember.Route.extend({
       });
       artistPromise.then(function() {
         route.modelFor('artists').pushObject(artist);
+        route.get('controller').set('newName', '');
+        route.transitionTo('artists.songs', artist);
+      }, function() {
+        alert('Failed to save artist');
       });
-      this.get('controller').set('newName', '');
-      this.transitionTo('artists.songs', artist);
     }
   }
 });
