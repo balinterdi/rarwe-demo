@@ -2,14 +2,11 @@ App = Ember.Application.create();
 
 App.Artist = Ember.Object.extend({
   name: null,
+  songs: [],
 
   slug: function() {
     return this.get('name').dasherize();
   }.property('name'),
-
-  // songs: function() {
-  //   return App.Songs.filterProperty('artist', this.get('name'));
-  // }.property('name', 'App.Songs.@each.artist')
 });
 
 App.Song = Ember.Object.extend({
@@ -67,8 +64,21 @@ App.ArtistsRoute = Ember.Route.extend({
 
 App.ArtistsSongsRoute = Ember.Route.extend({
   model: function(params) {
-    return App.Artists.findProperty('slug', params.slug);
+    return Ember.RSVP.Promise(function(resolve, reject) {
+      artistPromise = Ember.$.getJSON('http://localhost:9393/artists/' + params.slug + '.json');
+      artistPromise.then(function(artist) {
+        var artistObject = App.Artist.create({ name: artist.name });
+        var songs = [];
+        artist.songs.forEach(function(song) {
+          var songObject = App.Song.create({ title: song.title, rating: song.rating })
+          songs.push(songObject);
+        });
+        artistObject.set('songs', songs);
+        resolve(artistObject);
+      });
+    });
   },
+
   actions: {
     createSong: function() {
       var artist = this.controller.get('model.name');
