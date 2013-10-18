@@ -7,6 +7,14 @@ App.Artist = Ember.Object.extend({
   slug: function() {
     return this.get('name').dasherize();
   }.property('name'),
+
+  extractSongs: function(songsData) {
+    var artist = this;
+    var songObjects = songsData.map(function(song) {
+      return App.Song.create({ title: song.title, rating: song.rating, artist: artist });
+    });
+    this.set('songs', songObjects);
+  }
 });
 
 App.Song = Ember.Object.extend({
@@ -33,8 +41,9 @@ App.ArtistsRoute = Ember.Route.extend({
       Ember.$.getJSON('http://localhost:9393/artists.json').then(function(artists) {
         var artistObjects = [];
         artists.forEach(function(artist) {
-          var record = App.Artist.create({ name: artist.name });
-          artistObjects.push(record);
+          var artistObject = App.Artist.create({ name: artist.name });
+          artistObject.extractSongs(artist.songs);
+          artistObjects.push(artistObject);
         });
         resolve(artistObjects);
       });
@@ -68,12 +77,7 @@ App.ArtistsSongsRoute = Ember.Route.extend({
       artistPromise = Ember.$.getJSON('http://localhost:9393/artists/' + params.slug + '.json');
       artistPromise.then(function(artist) {
         var artistObject = App.Artist.create({ name: artist.name });
-        var songs = [];
-        artist.songs.forEach(function(song) {
-          var songObject = App.Song.create({ title: song.title, rating: song.rating })
-          songs.push(songObject);
-        });
-        artistObject.set('songs', songs);
+        artistObject.extractSongs(artist.songs);
         resolve(artistObject);
       });
     });
