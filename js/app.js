@@ -39,7 +39,7 @@ App.IndexRoute = Ember.Route.extend({
 App.ArtistsRoute = Ember.Route.extend({
   model: function() {
     return Ember.RSVP.Promise(function(resolve, reject) {
-      Ember.$.getJSON('http://localhost:9393/artists.json').then(function(artists) {
+      Ember.$.getJSON('http://localhost:9393/artists').then(function(artists) {
         var artistObjects = [];
         artists.forEach(function(artist) {
           var artistObject = App.Artist.create({ id: artist.id, name: artist.name });
@@ -56,7 +56,7 @@ App.ArtistsRoute = Ember.Route.extend({
       var name = this.get('controller').get('newName');
       var artist = App.Artist.create({ name: name });
 
-      var artistPromise = Ember.$.ajax('http://localhost:9393/artists.json', {
+      var artistPromise = Ember.$.ajax('http://localhost:9393/artists', {
         type: 'POST',
         headers: { 'Accept': 'application/json' },
         data: { name: name }
@@ -75,7 +75,7 @@ App.ArtistsRoute = Ember.Route.extend({
 App.ArtistsSongsRoute = Ember.Route.extend({
   model: function(params) {
     return Ember.RSVP.Promise(function(resolve, reject) {
-      artistPromise = Ember.$.getJSON('http://localhost:9393/artists/' + params.slug + '.json');
+      artistPromise = Ember.$.getJSON('http://localhost:9393/artists/' + params.slug);
       artistPromise.then(function(artist) {
         var artistObject = App.Artist.create({ name: artist.name });
         artistObject.extractSongs(artist.songs);
@@ -90,7 +90,7 @@ App.ArtistsSongsRoute = Ember.Route.extend({
       var artist = this.controller.get('model');
       var title = this.controller.get('newTitle');
       var song = App.Song.create({ title: title, artist: artist });
-      var songPromise = Ember.$.ajax('http://localhost:9393/songs.json', {
+      var songPromise = Ember.$.ajax('http://localhost:9393/songs', {
         type: 'POST',
         headers: { 'Accept': 'application/json' },
         data: { title: title, artist_id: artist.get('id') }
