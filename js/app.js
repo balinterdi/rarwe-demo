@@ -54,14 +54,14 @@ App.ArtistsRoute = Ember.Route.extend({
     createArtist: function() {
       var route = this;
       var name = this.get('controller').get('newName');
-      var artist = App.Artist.create({ name: name });
 
       var artistPromise = Ember.$.ajax('http://localhost:9393/artists', {
         type: 'POST',
-        headers: { 'Accept': 'application/json' },
+        dataType: 'json',
         data: { name: name }
       });
-      artistPromise.then(function() {
+      artistPromise.then(function(data) {
+        var artist = App.Artist.createRecord(data);
         route.modelFor('artists').pushObject(artist);
         route.get('controller').set('newName', '');
         route.transitionTo('artists.songs', artist);
