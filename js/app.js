@@ -8,13 +8,16 @@ App.Artist = Ember.Object.extend({
   slug: function() {
     return this.get('name').dasherize();
   }.property('name'),
+});
 
-  extractSongs: function(songsData) {
-    var artist = this;
-    var songObjects = songsData.map(function(song) {
+App.Artist.reopenClass({
+  createRecord: function(data) {
+    var artist = App.Artist.create({ id: data.id, name: data.name });
+    var songs = data.songs.map(function(song) {
       return App.Song.create({ title: song.title, rating: song.rating, artist: artist });
     });
-    this.set('songs', songObjects);
+    artist.set('songs', songs);
+    return artist;
   }
 });
 
@@ -40,11 +43,8 @@ App.ArtistsRoute = Ember.Route.extend({
   model: function() {
     return Ember.RSVP.Promise(function(resolve, reject) {
       Ember.$.getJSON('http://localhost:9393/artists').then(function(artists) {
-        var artistObjects = [];
-        artists.forEach(function(artist) {
-          var artistObject = App.Artist.create({ id: artist.id, name: artist.name });
-          artistObject.extractSongs(artist.songs);
-          artistObjects.push(artistObject);
+        var artistObjects = artists.map(function(data) {
+          return App.Artist.createRecord(data);
         });
         resolve(artistObjects);
       });
@@ -76,9 +76,8 @@ App.ArtistsSongsRoute = Ember.Route.extend({
   model: function(params) {
     return Ember.RSVP.Promise(function(resolve, reject) {
       artistPromise = Ember.$.getJSON('http://localhost:9393/artists/' + params.slug);
-      artistPromise.then(function(artist) {
-        var artistObject = App.Artist.create({ name: artist.name });
-        artistObject.extractSongs(artist.songs);
+      artistPromise.then(function(data) {
+        var artistObject = App.Artist.createRecord(data);
         resolve(artistObject);
       });
     });
