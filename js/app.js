@@ -22,9 +22,16 @@ App.Artist.reopenClass({
 });
 
 App.Song = Ember.Object.extend({
+  id: null,
   title: null,
   rating: null,
   artist: null
+});
+
+App.Song.reopenClass({
+  createRecord: function(data) {
+    return App.Song.create({ id: data.id, title: data.title, rating: data.rating });
+  }
 });
 
 App.Router.map(function() {
@@ -88,13 +95,14 @@ App.ArtistsSongsRoute = Ember.Route.extend({
       var route = this;
       var artist = this.controller.get('model');
       var title = this.controller.get('newTitle');
-      var song = App.Song.create({ title: title, artist: artist });
       var songPromise = Ember.$.ajax('http://localhost:9393/songs', {
         type: 'POST',
-        headers: { 'Accept': 'application/json' },
+        dataType: 'json',
         data: { title: title, artist_id: artist.get('id') }
       });
-      songPromise.then(function() {
+      songPromise.then(function(data) {
+        var song = App.Song.createRecord(data);
+        song.set('artist', artist);
         route.modelFor('artists.songs').get('songs').pushObject(song);
         route.get('controller').set('newTitle', '');
       }, function() {
