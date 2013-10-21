@@ -1,8 +1,8 @@
 App = Ember.Application.create();
 
 App.Artist = Ember.Object.extend({
-  id: null,
-  name: null,
+  id: '',
+  name: '',
   songs: [],
 
   slug: function() {
@@ -13,11 +13,13 @@ App.Artist = Ember.Object.extend({
 App.Artist.reopenClass({
   createRecord: function(data) {
     var artist = App.Artist.create({ id: data.id, name: data.name });
-    var songs = data.songs.map(function(song) {
+    artist.set('songs', this.extractSongs(data.songs, artist));
+    return artist;
+  },
+  extractSongs: function(songsData, artist) {
+    return songsData.map(function(song) {
       return App.Song.create({ title: song.title, rating: song.rating, artist: artist });
     });
-    artist.set('songs', songs);
-    return artist;
   }
 });
 
@@ -48,32 +50,32 @@ App.IndexRoute = Ember.Route.extend({
 
 App.ArtistsRoute = Ember.Route.extend({
   model: function() {
-    return Ember.RSVP.Promise(function(resolve, reject) {
-      Ember.$.getJSON('http://localhost:9393/artists').then(function(artists) {
-        var artistObjects = artists.map(function(data) {
-          return App.Artist.createRecord(data);
-        });
-        resolve(artistObjects);
+    var artistObjects = Ember.A();
+    Ember.$.getJSON('http://localhost:9393/artists', function(artists) {
+      artists.forEach(function(data) {
+        artistObjects.pushObject(App.Artist.createRecord(data));
       });
     });
+    return artistObjects;
   },
   actions: {
     createArtist: function() {
-      var route = this;
       var name = this.get('controller').get('newName');
 
-      var artistPromise = Ember.$.ajax('http://localhost:9393/artists', {
+      Ember.$.ajax('http://localhost:9393/artists', {
         type: 'POST',
         dataType: 'json',
-        data: { name: name }
-      });
-      artistPromise.then(function(data) {
-        var artist = App.Artist.createRecord(data);
-        route.modelFor('artists').pushObject(artist);
-        route.get('controller').set('newName', '');
-        route.transitionTo('artists.songs', artist);
-      }, function() {
-        alert('Failed to save artist');
+        data: { name: name },
+        context: this,
+        success: function(data) {
+          var artist = App.Artist.createRecord(data);
+          this.modelFor('artists').pushObject(artist);
+          this.get('controller').set('newName', '');
+          this.transitionTo('artists.songs', artist);
+        },
+        error: function() {
+          alert('Failed to save artist');
+        }
       });
     }
   }
@@ -81,32 +83,36 @@ App.ArtistsRoute = Ember.Route.extend({
 
 App.ArtistsSongsRoute = Ember.Route.extend({
   model: function(params) {
-    return Ember.RSVP.Promise(function(resolve, reject) {
-      artistPromise = Ember.$.getJSON('http://localhost:9393/artists/' + params.slug);
-      artistPromise.then(function(data) {
-        var artistObject = App.Artist.createRecord(data);
-        resolve(artistObject);
+    var artist = App.Artist.create();
+    var url = 'http://localhost:9393/artists/' + params.slug;
+    Ember.$.getJSON(url, function(data) {
+      artist.setProperties({
+        id: data.id,
+        name: data.name,
+        songs: App.Artist.extractSongs(data.songs, artist)
       });
     });
+    return artist;
   },
 
   actions: {
     createSong: function() {
-      var route = this;
       var artist = this.controller.get('model');
       var title = this.controller.get('newTitle');
-      var songPromise = Ember.$.ajax('http://localhost:9393/songs', {
+      Ember.$.ajax('http://localhost:9393/songs', {
         type: 'POST',
         dataType: 'json',
-        data: { title: title, artist_id: artist.get('id') }
-      });
-      songPromise.then(function(data) {
-        var song = App.Song.createRecord(data);
-        song.set('artist', artist);
-        route.modelFor('artists.songs').get('songs').pushObject(song);
-        route.get('controller').set('newTitle', '');
-      }, function() {
-        alert('Failed to save song');
+        context: this,
+        data: { title: title, artist_id: artist.id },
+        success: function(data) {
+          var song = App.Song.createRecord(data);
+          song.set('artist', artist);
+          this.modelFor('artists.songs').get('songs').pushObject(song);
+          this.get('controller').set('newTitle', '');
+        },
+        error: function() {
+          alert('Failed to save song');
+        }
       });
     }
   }
