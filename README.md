@@ -5,7 +5,7 @@ The Ember.js app I build during the introductory screencast series to my mailing
 
 The code for the backend server in the last episode lives at [balinterdi/rock-and-roll-api](https://github.com/balinterdi/rock-and-roll-api).
 
-### Want more good Ember stuff?
+### Want more Ember stuff?
 
 If you would like to learn more about Ember.js and receive valuable content regularly, you can [sign up here](http://emberjs.balinterdi.com).
 
