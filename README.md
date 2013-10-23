@@ -3,7 +3,11 @@ Rock & Roll with Ember.js
 
 The Ember.js app I build during the introductory screencast series to my mailing list.
 
-If you're interested to watch the screencasts or would like to receive Ember.js related articles, best practice tips and more, you can sign up at [http://emberjs.balinterdi.com](http://emberjs.balinterdi.com)
+The code for the backend server in the last episode lives at [balinterdi/rock-and-roll-api](https://github.com/balinterdi/rock-and-roll-api).
+
+### Want more good Ember stuff?
+
+If you would like to learn more about Ember.js and receive valuable content regularly, you can [sign up here](http://emberjs.balinterdi.com).
 
 ### Tips on working along
 
