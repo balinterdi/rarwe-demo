@@ -137,7 +137,7 @@ App.StarRating = Ember.View.extend({
 
   starRange: function(start, end, type) {
     var starsData = [];
-    for (i = start; i <= end; i++) {
+    for (var i = start; i <= end; i++) {
       starsData.push({ rating: i, full: type === 'full' });
     };
     return starsData;
