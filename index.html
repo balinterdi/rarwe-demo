@@ -59,7 +59,7 @@
         <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}}>Add</button>
       </div>
     {{/if}}
-    {{#each songs}}
+    {{#each songs itemController="song"}}
       <div class="list-group-item">
         {{title}}
         {{view App.StarRating maxRating=5}}
@@ -77,10 +77,10 @@
 
   <script type="text/x-handlebars" data-template-name="star-rating">
     {{#each view.stars}}
-      <span {{bind-attr data-rating=rating}}
-        {{bind-attr class=":star-rating :glyphicon full:glyphicon-star:glyphicon-star-empty"}}
-        {{action "setRating" target=view}}>
-      </span>
+      <div {{action "setRating" rating}}
+        {{bind-attr class=":star-rating :glyphicon
+                           full:glyphicon-star:glyphicon-star-empty"}}>
+      </div>
     {{/each}}
   </script>
 

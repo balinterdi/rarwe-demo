@@ -141,13 +141,6 @@ App.StarRating = Ember.View.extend({
       starsData.push({ rating: i, full: type === 'full' });
     };
     return starsData;
-  },
-
-  actions: {
-    setRating: function() {
-      var newRating = $(event.target).data('rating');
-      this.set('rating', newRating);
-    }
   }
 });
 
@@ -176,4 +169,14 @@ App.ArtistsSongsController = Ember.ObjectController.extend({
   }
 
 });
+
+App.SongController = Ember.ObjectController.extend({
+  actions: {
+    setRating: function(newRating) {
+      this.set('rating', newRating);
+      //TODO: Send a PUT request to the backend to persist the new rating
+    }
+  }
+});
+
 
