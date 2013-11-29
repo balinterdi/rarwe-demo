@@ -1,5 +1,57 @@
 App = Ember.Application.create();
 
+// Have errors thrown in promises surface instead of being swallowed
+Ember.RSVP.configure('onerror', function(error) {
+  Ember.Logger.assert(false, error);
+});
+
+App.Store = {
+  map: {},
+  fetchAll: function(type) {
+    var store = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      Ember.$.getJSON('http://localhost:9393/artists', function(artists) {
+        var artistObjects = Ember.A();
+        artists.forEach(function(data) {
+          var artist = App.Artist.createRecord(data);
+          store.save('artist', artist.get('slug'), artist);
+          artistObjects.pushObject(artist);
+        });
+        resolve(artistObjects);
+      });
+    });
+  },
+
+  fetch: function(type, id) {
+    var store = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      var artist = store.map[store._key(type, id)];
+      if (artist) {
+        resolve(artist);
+      } else {
+        var url = 'http://localhost:9393/artists/' + id;
+        Ember.$.getJSON(url).then(function(data) {
+          var artist = App.Artist.create();
+          artist.setProperties({
+            id: data.id,
+            name: data.name,
+            songs: App.Artist.extractSongs(data.songs, artist)
+          });
+          store.save('artist', id, artist);
+          resolve(artist);
+        });
+      }
+    });
+  },
+
+  save: function(type, id, object) {
+    this.map[this._key(type, id)] = object;
+  },
+  _key: function(type, id) {
+    return type + ':' + id;
+  }
+}
+
 App.Artist = Ember.Object.extend({
   id: '',
   name: '',
@@ -50,13 +102,7 @@ App.IndexRoute = Ember.Route.extend({
 
 App.ArtistsRoute = Ember.Route.extend({
   model: function() {
-    var artistObjects = Ember.A();
-    Ember.$.getJSON('http://localhost:9393/artists', function(artists) {
-      artists.forEach(function(data) {
-        artistObjects.pushObject(App.Artist.createRecord(data));
-      });
-    });
-    return artistObjects;
+    return App.Store.fetchAll('artist');
   },
   actions: {
     createArtist: function() {
@@ -83,16 +129,7 @@ App.ArtistsRoute = Ember.Route.extend({
 
 App.ArtistsSongsRoute = Ember.Route.extend({
   model: function(params) {
-    var artist = App.Artist.create();
-    var url = 'http://localhost:9393/artists/' + params.slug;
-    Ember.$.getJSON(url, function(data) {
-      artist.setProperties({
-        id: data.id,
-        name: data.name,
-        songs: App.Artist.extractSongs(data.songs, artist)
-      });
-    });
-    return artist;
+    return App.Store.fetch('artist', params.slug);
   },
 
   actions: {
