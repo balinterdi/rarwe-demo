@@ -18,7 +18,7 @@ App.Artist.reopenClass({
   },
   extractSongs: function(songsData, artist) {
     return songsData.map(function(song) {
-      return App.Song.create({ title: song.title, rating: song.rating, artist: artist });
+      return App.Song.create({ id: song.id, title: song.title, rating: song.rating, artist: artist });
     });
   }
 });
@@ -151,6 +151,15 @@ App.StarRating = Ember.View.extend({
     setRating: function() {
       var newRating = $(event.target).data('rating');
       this.set('rating', newRating);
+      Ember.$.ajax('http://localhost:9393/songs/' + this.get('context.id'), {
+        type: 'PUT',
+        dataType: 'json',
+        context: this,
+        data: { rating: newRating },
+        error: function() {
+          alert('Failed to set new rating');
+        }
+      });
     }
   }
 });
