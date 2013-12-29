@@ -1,5 +1,11 @@
 App = Ember.Application.create();
 
+App.Adapter = {
+  ajax: function(path, options) {
+    return Ember.$.ajax('http://localhost:9393' + path, options)
+  }
+}
+
 App.Artist = Ember.Object.extend({
   id: '',
   name: '',
@@ -55,7 +61,7 @@ App.IndexRoute = Ember.Route.extend({
 App.ArtistsRoute = Ember.Route.extend({
   model: function() {
     var artistObjects = Ember.A();
-    Ember.$.ajax('http://localhost:9393/artists', {
+    App.Adapter.ajax('/artists', {
       dataType: 'json',
       success: function(artists) {
         artists.forEach(function(data) {
@@ -69,7 +75,7 @@ App.ArtistsRoute = Ember.Route.extend({
     createArtist: function() {
       var name = this.get('controller').get('newName');
 
-      Ember.$.ajax('http://localhost:9393/artists', {
+      App.Adapter.ajax('/artists', {
         type: 'POST',
         dataType: 'json',
         data: { name: name },
@@ -91,8 +97,7 @@ App.ArtistsRoute = Ember.Route.extend({
 App.ArtistsSongsRoute = Ember.Route.extend({
   model: function(params) {
     var artist = App.Artist.create();
-    var url = 'http://localhost:9393/artists/' + params.slug;
-    Ember.$.ajax(url, {
+    App.Adapter.ajax('/artists/' + params.slug, {
       dataType: 'json',
       success: function(data) {
         artist.setProperties({
@@ -109,7 +114,7 @@ App.ArtistsSongsRoute = Ember.Route.extend({
     createSong: function() {
       var artist = this.controller.get('model');
       var title = this.controller.get('newTitle');
-      Ember.$.ajax('http://localhost:9393/songs', {
+      App.Adapter.ajax('/songs', {
         type: 'POST',
         dataType: 'json',
         context: this,
@@ -157,7 +162,7 @@ App.StarRating = Ember.View.extend({
     setRating: function() {
       var newRating = $(event.target).data('rating');
       this.set('rating', newRating);
-      Ember.$.ajax('http://localhost:9393/songs/' + this.get('context.id'), {
+      App.Adapter.ajax('/songs/' + this.get('context.id'), {
         type: 'PUT',
         dataType: 'json',
         context: this,
