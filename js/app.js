@@ -55,10 +55,13 @@ App.IndexRoute = Ember.Route.extend({
 App.ArtistsRoute = Ember.Route.extend({
   model: function() {
     var artistObjects = Ember.A();
-    Ember.$.getJSON('http://localhost:9393/artists', function(artists) {
-      artists.forEach(function(data) {
-        artistObjects.pushObject(App.Artist.createRecord(data));
-      });
+    Ember.$.ajax('http://localhost:9393/artists', {
+      dataType: 'json',
+      success: function(artists) {
+        artists.forEach(function(data) {
+          artistObjects.pushObject(App.Artist.createRecord(data));
+        });
+      }
     });
     return artistObjects;
   },
@@ -89,12 +92,15 @@ App.ArtistsSongsRoute = Ember.Route.extend({
   model: function(params) {
     var artist = App.Artist.create();
     var url = 'http://localhost:9393/artists/' + params.slug;
-    Ember.$.getJSON(url, function(data) {
-      artist.setProperties({
-        id: data.id,
-        name: data.name,
-        songs: App.Artist.extractSongs(data.songs, artist)
-      });
+    Ember.$.ajax(url, {
+      dataType: 'json',
+      success: function(data) {
+        artist.setProperties({
+          id: data.id,
+          name: data.name,
+          songs: App.Artist.extractSongs(data.songs, artist)
+        });
+      }
     });
     return artist;
   },
