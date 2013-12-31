@@ -2,7 +2,7 @@ App = Ember.Application.create();
 
 App.Adapter = {
   ajax: function(path, options) {
-    return Ember.$.ajax('http://localhost:9393' + path, options)
+    return Ember.$.ajax('http://rock-and-roll-api.herokuapp.com' + path, options)
   }
 }
 
