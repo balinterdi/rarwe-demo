@@ -30,7 +30,7 @@
             {{bind-attr disabled=disabled}}>Add</button>
         </div>
         {{#each model}}
-          {{#link-to "artists.songs" this class="list-group-item artist-link"}}
+          {{#link-to "artist.songs" this class="list-group-item artist-link"}}
             {{name}}
             <span class="pointer glyphicon glyphicon-chevron-right"></span>
           {{/link-to}}
@@ -52,14 +52,18 @@
     </div>
   </script>
 
-  <script type="text/x-handlebars" data-template-name="artists/songs">
+  <script type="text/x-handlebars" data-template-name="artist">
+    {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="artist/songs">
     {{#if canCreateSong}}
       <div class="list-group-item">
         {{input type="text" class="new-artist" placeholder=newSongPlaceholder value=newTitle insert-newline="createSong" }}
         <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}}>Add</button>
       </div>
     {{/if}}
-    {{#each songs}}
+    {{#each}}
       <div class="list-group-item">
         {{title}}
         {{star-rating item=this rating=rating maxRating=5 setAction="setRating"}}
@@ -68,7 +72,7 @@
       {{#unless canCreateSong}}
         <div class="list-group-item empty-list">
           <div class="empty-message">
-            There are no {{name}} songs. Why don't you <a href="#" {{action enableSongCreation}}>create one?</a>
+            There are no {{artist.name}} songs. Why don't you <a href="#" {{action enableSongCreation}}>create one?</a>
           </div>
         </div>
       {{/unless}}
