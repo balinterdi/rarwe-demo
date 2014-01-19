@@ -2,6 +2,8 @@ App = Ember.Application.create();
 
 App.Adapter = {
   ajax: function(path, options) {
+    var options = options || {};
+    options.dataType = 'json';
     return Ember.$.ajax('http://rock-and-roll-api.herokuapp.com' + path, options)
   }
 }
@@ -56,16 +58,17 @@ App.IndexRoute = Ember.Route.extend({
 
 App.ArtistsRoute = Ember.Route.extend({
   model: function() {
-    var artistObjects = Ember.A();
-    App.Adapter.ajax('/artists', {
-      dataType: 'json',
-      success: function(artists) {
+    return Ember.RSVP.Promise(function(resolve, reject) {
+      var artistObjects = [];
+      App.Adapter.ajax('/artists').then(function(artists) {
         artists.forEach(function(data) {
           artistObjects.pushObject(App.Artist.createRecord(data));
         });
-      }
+        resolve(artistObjects);
+      }, function(error) {
+        reject(error);
+      });
     });
-    return artistObjects;
   },
   actions: {
     createArtist: function() {
@@ -73,18 +76,15 @@ App.ArtistsRoute = Ember.Route.extend({
 
       App.Adapter.ajax('/artists', {
         type: 'POST',
-        dataType: 'json',
         data: { name: name },
-        context: this,
-        success: function(data) {
+        context: this
+      }).then(function(data) {
           var artist = App.Artist.createRecord(data);
           this.modelFor('artists').pushObject(artist);
           this.get('controller').set('newName', '');
-          this.transitionTo('artists.songs', artist);
-        },
-        error: function() {
-          alert('Failed to save artist');
-        }
+          this.transitionTo('artist.songs', artist);
+      }, function(reason) {
+        alert('Failed to save artist');
       });
     }
   }
@@ -92,18 +92,13 @@ App.ArtistsRoute = Ember.Route.extend({
 
 App.ArtistsSongsRoute = Ember.Route.extend({
   model: function(params) {
-    var artist = App.Artist.create();
-    App.Adapter.ajax('/artists/' + params.slug, {
-      dataType: 'json',
-      success: function(data) {
-        artist.setProperties({
-          id: data.id,
-          name: data.name,
-          songs: App.Artist.extractSongs(data.songs, artist)
-        });
-      }
+    return Ember.RSVP.Promise(function(resolve, reject) {
+      App.Adapter.ajax('/artists/' + params.slug).then(function(data) {
+        resolve(App.Artist.createRecord(data));
+      }, function(error) {
+        reject(error);
+      });
     });
-    return artist;
   },
 
   actions: {
@@ -112,18 +107,15 @@ App.ArtistsSongsRoute = Ember.Route.extend({
       var title = this.controller.get('newTitle');
       App.Adapter.ajax('/songs', {
         type: 'POST',
-        dataType: 'json',
         context: this,
-        data: { title: title, artist_id: artist.id },
-        success: function(data) {
-          var song = App.Song.createRecord(data);
-          song.set('artist', artist);
-          this.modelFor('artists.songs').get('songs').pushObject(song);
-          this.get('controller').set('newTitle', '');
-        },
-        error: function() {
-          alert('Failed to save song');
-        }
+        data: { title: title, artist_id: artist.id }
+      }).then(function(data) {
+        var song = App.Song.createRecord(data);
+        song.set('artist', artist);
+        this.modelFor('artists.songs').get('songs').pushObject(song);
+        this.get('controller').set('newTitle', '');
+      }, function(reason) {
+        alert('Failed to save song');
       });
     }
   }
