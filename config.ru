@@ -9,9 +9,6 @@ use Rack::ContentLength
 run Proc.new { |env|
   # Extract the requested path from the request
   path = Rack::Utils.unescape(env['PATH_INFO'])
-  if path.start_with?("/artists")
-    path = '/'
-  end
   index_file = @root + "#{path}/index.html"
 
   if File.exists?(index_file)
