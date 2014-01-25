@@ -152,12 +152,12 @@ App.StarRating = Ember.View.extend({
       this.set('rating', newRating);
       App.Adapter.ajax('/songs/' + this.get('context.id'), {
         type: 'PUT',
-        dataType: 'json',
         context: this,
-        data: { rating: newRating },
-        error: function() {
-          alert('Failed to set new rating');
-        }
+        data: { rating: newRating }
+      }).then(function() {
+        console.log("Rating updated");
+      }, function() {
+        alert('Failed to set new rating');
       });
     }
   }
