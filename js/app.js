@@ -136,8 +136,23 @@ App.ArtistsSongsRoute = Ember.Route.extend({
 App.StarRatingComponent = Ember.Component.extend({
   classNames: ['rating-panel'],
 
-  fullStars: Ember.computed.alias('item.rating'),
   numStars:  Ember.computed.alias('maxRating'),
+  fullStars: null,
+
+  didInsertElement: function() {
+    var property = this.get('ratingProperty');
+    this.set('fullStars', this.get('item').get(property));
+    Ember.addObserver(this.get('item'), property, this, this.ratingPropertyDidChange);
+  },
+
+  willDestroyElement: function() {
+    var property = this.get('ratingProperty');
+    Ember.removeObserver(this.get('item'), property, this.ratingPropertyDidChange);
+  },
+
+  ratingPropertyDidChange: function(item, ratingProperty) {
+    this.set('fullStars', item.get(ratingProperty));
+  },
 
   stars: function() {
     var ratings = [];
@@ -159,7 +174,7 @@ App.StarRatingComponent = Ember.Component.extend({
   actions: {
     setRating: function() {
       var newRating = parseInt($(event.target).attr('data-rating'), 10);
-      this.get('item').set('rating', newRating);
+      this.get('item').set(this.get('ratingProperty'), newRating);
       this.sendAction('setAction', this.get('item'));
     }
   }
