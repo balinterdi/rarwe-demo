@@ -62,7 +62,7 @@
     {{#each songs}}
       <div class="list-group-item">
         {{title}}
-        {{star-rating item=this ratingProperty="rating" maxRating=5 setAction="setRating"}}
+        {{star-rating item=this rating=rating maxRating=5 setAction="setRating"}}
       </div>
     {{else}}
       {{#unless canCreateSong}}

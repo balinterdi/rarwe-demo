@@ -119,11 +119,14 @@ App.ArtistsSongsRoute = Ember.Route.extend({
       });
     },
 
-    setRating: function(song) {
+    setRating: function(params) {
+      var song = params.item;
+      var rating = params.rating;
+      song.set('rating', rating);
       App.Adapter.ajax('/songs/' + song.get('id'), {
         type: 'PUT',
         context: this,
-        data: { rating: song.get('rating') }
+        data: { rating: rating }
       }).then(function() {
         console.log("Rating updated");
       }, function() {
@@ -137,22 +140,7 @@ App.StarRatingComponent = Ember.Component.extend({
   classNames: ['rating-panel'],
 
   numStars:  Ember.computed.alias('maxRating'),
-  fullStars: null,
-
-  didInsertElement: function() {
-    var property = this.get('ratingProperty');
-    this.set('fullStars', this.get('item').get(property));
-    Ember.addObserver(this.get('item'), property, this, this.ratingPropertyDidChange);
-  },
-
-  willDestroyElement: function() {
-    var property = this.get('ratingProperty');
-    Ember.removeObserver(this.get('item'), property, this.ratingPropertyDidChange);
-  },
-
-  ratingPropertyDidChange: function(item, ratingProperty) {
-    this.set('fullStars', item.get(ratingProperty));
-  },
+  fullStars: Ember.computed.alias('rating'),
 
   stars: function() {
     var ratings = [];
@@ -174,8 +162,10 @@ App.StarRatingComponent = Ember.Component.extend({
   actions: {
     setRating: function() {
       var newRating = parseInt($(event.target).attr('data-rating'), 10);
-      this.get('item').set(this.get('ratingProperty'), newRating);
-      this.sendAction('setAction', this.get('item'));
+      this.sendAction('setAction', {
+        item: this.get('item'),
+        rating: newRating
+      });
     }
   }
 });
