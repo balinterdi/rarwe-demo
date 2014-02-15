@@ -160,8 +160,7 @@ App.StarRatingComponent = Ember.Component.extend({
   },
 
   actions: {
-    setRating: function() {
-      var newRating = parseInt($(event.target).attr('data-rating'), 10);
+    setRating: function(newRating) {
       this.sendAction('setAction', {
         item: this.get('item'),
         rating: newRating

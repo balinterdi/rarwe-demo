@@ -77,9 +77,9 @@
 
   <script type="text/x-handlebars" data-template-name="components/star-rating">
     {{#each stars}}
-      <span {{bind-attr data-rating=rating}}
+      <span
         {{bind-attr class=":star-rating :glyphicon full:glyphicon-star:glyphicon-star-empty"}}
-        {{action "setRating"}}>
+        {{action "setRating" rating}}>
       </span>
     {{/each}}
   </script>
