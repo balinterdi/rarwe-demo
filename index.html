@@ -62,7 +62,7 @@
     {{#each songs}}
       <div class="list-group-item">
         {{title}}
-        {{view App.StarRating maxRating=5}}
+        {{star-rating item=this rating=rating maxRating=5 setAction="setRating"}}
       </div>
     {{else}}
       {{#unless canCreateSong}}
@@ -75,11 +75,11 @@
     {{/each}}
   </script>
 
-  <script type="text/x-handlebars" data-template-name="star-rating">
-    {{#each view.stars}}
-      <span {{bind-attr data-rating=rating}}
+  <script type="text/x-handlebars" data-template-name="components/star-rating">
+    {{#each stars}}
+      <span
         {{bind-attr class=":star-rating :glyphicon full:glyphicon-star:glyphicon-star-empty"}}
-        {{action "setRating" target=view}}>
+        {{action "setRating" rating}}>
       </span>
     {{/each}}
   </script>

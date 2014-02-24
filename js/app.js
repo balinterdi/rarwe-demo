@@ -117,17 +117,34 @@ App.ArtistsSongsRoute = Ember.Route.extend({
       }, function(reason) {
         alert('Failed to save song');
       });
+    },
+
+    setRating: function(params) {
+      var song = params.item,
+          rating = params.rating;
+
+      if (song.get('rating') === rating) {
+        rating = 0;
+      }
+      song.set('rating', rating);
+      App.Adapter.ajax('/songs/' + song.get('id'), {
+        type: 'PUT',
+        context: this,
+        data: { rating: rating }
+      }).then(function() {
+        console.log("Rating updated");
+      }, function() {
+        alert('Failed to set new rating');
+      });
     }
   }
 });
 
-App.StarRating = Ember.View.extend({
+App.StarRatingComponent = Ember.Component.extend({
   classNames: ['rating-panel'],
-  templateName: 'star-rating',
-  rating: Ember.computed.alias('context.rating'),
 
-  fullStars: Ember.computed.alias('rating'),
   numStars:  Ember.computed.alias('maxRating'),
+  fullStars: Ember.computed.alias('rating'),
 
   stars: function() {
     var ratings = [];
@@ -147,17 +164,10 @@ App.StarRating = Ember.View.extend({
   },
 
   actions: {
-    setRating: function() {
-      var newRating = $(event.target).data('rating');
-      this.set('rating', newRating);
-      App.Adapter.ajax('/songs/' + this.get('context.id'), {
-        type: 'PUT',
-        context: this,
-        data: { rating: newRating }
-      }).then(function() {
-        console.log("Rating updated");
-      }, function() {
-        alert('Failed to set new rating');
+    setRating: function(newRating) {
+      this.sendAction('setAction', {
+        item: this.get('item'),
+        rating: newRating
       });
     }
   }
