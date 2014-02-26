@@ -1,5 +1,12 @@
 App = Ember.Application.create();
 
+Ember.RSVP.configure('onerror', function(error) {
+  if (error instanceof Error) {
+    Ember.Logger.assert(false, error);
+    Ember.Logger.error(error.stack);
+  }
+});
+
 App.Adapter = {
   ajax: function(path, options) {
     var options = options || {};
@@ -46,7 +53,9 @@ App.Song.reopenClass({
 
 App.Router.map(function() {
   this.resource('artists', function() {
-    this.route('songs', { path: ':slug' });
+    this.resource('artist', { path: ':slug' }, function() {
+      this.route('songs');
+    });
   });
 });
 
@@ -90,7 +99,7 @@ App.ArtistsRoute = Ember.Route.extend({
   }
 });
 
-App.ArtistsSongsRoute = Ember.Route.extend({
+App.ArtistRoute = Ember.Route.extend({
   model: function(params) {
     return Ember.RSVP.Promise(function(resolve, reject) {
       App.Adapter.ajax('/artists/' + params.slug).then(function(data) {
@@ -99,11 +108,22 @@ App.ArtistsSongsRoute = Ember.Route.extend({
         reject(error);
       });
     });
+  }
+});
+
+App.ArtistSongsRoute = Ember.Route.extend({
+  model: function(params) {
+    return this.modelFor('artist').get('songs');
+  },
+
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    controller.set('artist', this.modelFor('artist'));
   },
 
   actions: {
     createSong: function() {
-      var artist = this.controller.get('model');
+      var artist = this.modelFor('artist');
       var title = this.controller.get('newTitle');
       App.Adapter.ajax('/songs', {
         type: 'POST',
@@ -112,7 +132,7 @@ App.ArtistsSongsRoute = Ember.Route.extend({
       }).then(function(data) {
         var song = App.Song.createRecord(data);
         song.set('artist', artist);
-        this.modelFor('artists.songs').get('songs').pushObject(song);
+        this.modelFor('artist.songs').pushObject(song);
         this.get('controller').set('newTitle', '');
       }, function(reason) {
         alert('Failed to save song');
@@ -180,16 +200,17 @@ App.ArtistsController = Ember.ArrayController.extend({
   }.property('newName')
 });
 
-App.ArtistsSongsController = Ember.ObjectController.extend({
+App.ArtistSongsController = Ember.ArrayController.extend({
+  artist: null,
 
   newSongPlaceholder: function() {
-    return 'New ' + this.get('name') + ' song';
-  }.property('name'),
+    return 'New ' + this.get('artist.name') + ' song';
+  }.property('artist.name'),
 
   songCreationStarted: false,
   canCreateSong: function() {
-    return this.get('songCreationStarted') || this.get('songs.length');
-  }.property('songCreationStarted', 'songs.length'),
+    return this.get('songCreationStarted') || this.get('length');
+  }.property('songCreationStarted', 'length'),
 
   actions: {
     enableSongCreation: function() {
