@@ -202,6 +202,8 @@ App.ArtistsController = Ember.ArrayController.extend({
 
 App.ArtistSongsController = Ember.ArrayController.extend({
   artist: null,
+  sortAscending: false,
+  sortProperties: ['rating', 'title'],
 
   newSongPlaceholder: function() {
     return 'New ' + this.get('artist.name') + ' song';
