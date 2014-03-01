@@ -63,7 +63,7 @@
         <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}}>Add</button>
       </div>
     {{/if}}
-    {{#each}}
+    {{#each sortedSongs}}
       <div class="list-group-item">
         {{title}}
         {{star-rating item=this rating=rating maxRating=5 setAction="setRating"}}
