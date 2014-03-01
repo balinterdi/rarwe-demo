@@ -61,6 +61,7 @@
       <div class="list-group-item">
         {{input type="text" class="new-artist" placeholder=newSongPlaceholder value=newTitle insert-newline="createSong" }}
         <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}}>Add</button>
+        <button class="btn btn-link pull-right" {{action "sortBy" "title:asc"}}>Sort by title</button>
       </div>
     {{/if}}
     {{#each sortedSongs}}

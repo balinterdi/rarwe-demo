@@ -215,6 +215,9 @@ App.ArtistSongsController = Ember.ArrayController.extend({
   }.property('songCreationStarted', 'length'),
 
   actions: {
+    sortBy: function(sortProperties) {
+      this.set('sortProperties', [sortProperties]);
+    },
     enableSongCreation: function() {
       this.set('songCreationStarted', true);
     }
