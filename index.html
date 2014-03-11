@@ -61,7 +61,11 @@
       <div class="list-group-item">
         {{input type="text" class="new-artist" placeholder=newSongPlaceholder value=newTitle insert-newline="createSong" }}
         <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}}>Add</button>
-        <button class="btn btn-link pull-right" {{action "sortBy" "title:asc"}}>Sort by title</button>
+        {{view Ember.Select content=sortOptions
+                            value=selectedSort
+                            optionValuePath="content.id"
+                            optionLabelPath="content.name"
+                            classNames="pull-right"}}
       </div>
     {{/if}}
     {{#each sortedSongs}}
