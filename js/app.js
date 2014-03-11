@@ -67,7 +67,7 @@ App.IndexRoute = Ember.Route.extend({
 
 App.ArtistsRoute = Ember.Route.extend({
   model: function() {
-    return Ember.RSVP.Promise(function(resolve, reject) {
+    return new Ember.RSVP.Promise(function(resolve, reject) {
       var artistObjects = [];
       App.Adapter.ajax('/artists').then(function(artists) {
         artists.forEach(function(data) {
@@ -101,7 +101,7 @@ App.ArtistsRoute = Ember.Route.extend({
 
 App.ArtistRoute = Ember.Route.extend({
   model: function(params) {
-    return Ember.RSVP.Promise(function(resolve, reject) {
+    return new Ember.RSVP.Promise(function(resolve, reject) {
       App.Adapter.ajax('/artists/' + params.slug).then(function(data) {
         resolve(App.Artist.createRecord(data));
       }, function(error) {
