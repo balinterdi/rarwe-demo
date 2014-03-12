@@ -67,7 +67,7 @@ App.IndexRoute = Ember.Route.extend({
 
 App.ArtistsRoute = Ember.Route.extend({
   model: function() {
-    return Ember.RSVP.Promise(function(resolve, reject) {
+    return new Ember.RSVP.Promise(function(resolve, reject) {
       var artistObjects = [];
       App.Adapter.ajax('/artists').then(function(artists) {
         artists.forEach(function(data) {
@@ -101,7 +101,7 @@ App.ArtistsRoute = Ember.Route.extend({
 
 App.ArtistRoute = Ember.Route.extend({
   model: function(params) {
-    return Ember.RSVP.Promise(function(resolve, reject) {
+    return new Ember.RSVP.Promise(function(resolve, reject) {
       App.Adapter.ajax('/artists/' + params.slug).then(function(data) {
         resolve(App.Artist.createRecord(data));
       }, function(error) {
@@ -202,6 +202,21 @@ App.ArtistsController = Ember.ArrayController.extend({
 
 App.ArtistSongsController = Ember.ArrayController.extend({
   artist: null,
+  sortOptions: [
+    { id: "rating:desc,title:asc", name: "Best" },
+    { id: "title:asc", name: "By title (asc)" },
+    { id: "title:desc", name: "By title (desc)" },
+    { id: "rating:asc", name: "By rating (asc)" },
+    { id: "rating:desc", name: "By rating (desc)" },
+  ],
+  selectedSort: 'rating:desc,title:asc',
+
+  sortProperties: function() {
+    var selected = this.get('selectedSort');
+    return (selected ? selected.split(',') : ['rating:desc', 'title:asc']);
+  }.property('selectedSort'),
+
+  sortedSongs: Ember.computed.sort('model', 'sortProperties'),
 
   newSongPlaceholder: function() {
     return 'New ' + this.get('artist.name') + ' song';
