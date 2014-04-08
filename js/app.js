@@ -11,7 +11,7 @@ App.Adapter = {
   ajax: function(path, options) {
     var options = options || {};
     options.dataType = 'json';
-    return Ember.$.ajax('http://rock-and-roll-api.herokuapp.com' + path, options)
+    return ic.ajax.request('http://localhost:9393' + path, options);
   }
 }
 
@@ -81,10 +81,10 @@ App.ArtistsRoute = Ember.Route.extend({
         data: { name: name },
         context: this
       }).then(function(data) {
-          var artist = App.Artist.createRecord(data);
-          this.modelFor('artists').pushObject(artist);
-          this.get('controller').set('newName', '');
-          this.transitionTo('artist.songs', artist);
+        var artist = App.Artist.createRecord(data);
+        this.modelFor('artists').pushObject(artist);
+        this.get('controller').set('newName', '');
+        this.transitionTo('artist.songs', artist);
       }, function(reason) {
         alert('Failed to save artist');
       });
