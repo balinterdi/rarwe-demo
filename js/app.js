@@ -11,7 +11,7 @@ App.Adapter = {
   ajax: function(path, options) {
     var options = options || {};
     options.dataType = 'json';
-    return Ember.$.ajax('http://rock-and-roll-api.herokuapp.com' + path, options)
+    return ic.ajax.request('http://localhost:9393' + path, options);
   }
 }
 
@@ -29,7 +29,7 @@ App.Artist.reopenClass({
   createRecord: function(data) {
     var artist = App.Artist.create({ id: data.id, name: data.name });
     artist.set('songs', this.extractSongs(data.songs, artist));
-    return artist;
+    return Ember.RSVP.resolve(artist);
   },
   extractSongs: function(songsData, artist) {
     return songsData.map(function(song) {
@@ -67,16 +67,9 @@ App.IndexRoute = Ember.Route.extend({
 
 App.ArtistsRoute = Ember.Route.extend({
   model: function() {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      var artistObjects = [];
-      App.Adapter.ajax('/artists').then(function(artists) {
-        artists.forEach(function(data) {
-          artistObjects.pushObject(App.Artist.createRecord(data));
-        });
-        resolve(artistObjects);
-      }, function(error) {
-        reject(error);
-      });
+    return App.Adapter.ajax('/artists').then(function(data) {
+      artists = data.map(App.Artist.createRecord, App.Artist);
+      return Ember.RSVP.all(artists);
     });
   },
   actions: {
@@ -88,10 +81,10 @@ App.ArtistsRoute = Ember.Route.extend({
         data: { name: name },
         context: this
       }).then(function(data) {
-          var artist = App.Artist.createRecord(data);
-          this.modelFor('artists').pushObject(artist);
-          this.get('controller').set('newName', '');
-          this.transitionTo('artist.songs', artist);
+        var artist = App.Artist.createRecord(data);
+        this.modelFor('artists').pushObject(artist);
+        this.get('controller').set('newName', '');
+        this.transitionTo('artist.songs', artist);
       }, function(reason) {
         alert('Failed to save artist');
       });
@@ -101,12 +94,8 @@ App.ArtistsRoute = Ember.Route.extend({
 
 App.ArtistRoute = Ember.Route.extend({
   model: function(params) {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      App.Adapter.ajax('/artists/' + params.slug).then(function(data) {
-        resolve(App.Artist.createRecord(data));
-      }, function(error) {
-        reject(error);
-      });
+    return App.Adapter.ajax('/artists/' + params.slug).then(function(data) {
+      return App.Artist.createRecord(data);
     });
   }
 });
