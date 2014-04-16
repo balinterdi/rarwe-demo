@@ -75,6 +75,7 @@ App.ArtistsRoute = Ember.Route.extend({
   actions: {
     createArtist: function() {
       var name = this.get('controller').get('newName');
+      var self = this;
 
       App.Adapter.ajax('/artists', {
         type: 'POST',
@@ -82,9 +83,9 @@ App.ArtistsRoute = Ember.Route.extend({
         context: this
       }).then(function(data) {
         var artist = App.Artist.createRecord(data);
-        this.modelFor('artists').pushObject(artist);
-        this.get('controller').set('newName', '');
-        this.transitionTo('artist.songs', artist);
+        self.modelFor('artists').pushObject(artist);
+        self.get('controller').set('newName', '');
+        self.transitionTo('artist.songs', artist);
       }, function(reason) {
         alert('Failed to save artist');
       });
@@ -114,6 +115,7 @@ App.ArtistSongsRoute = Ember.Route.extend({
     createSong: function() {
       var artist = this.modelFor('artist');
       var title = this.controller.get('newTitle');
+      var self = this;
       App.Adapter.ajax('/songs', {
         type: 'POST',
         context: this,
@@ -121,8 +123,8 @@ App.ArtistSongsRoute = Ember.Route.extend({
       }).then(function(data) {
         var song = App.Song.createRecord(data);
         song.set('artist', artist);
-        this.modelFor('artist.songs').pushObject(song);
-        this.get('controller').set('newTitle', '');
+        self.modelFor('artist.songs').pushObject(song);
+        self.get('controller').set('newTitle', '');
       }, function(reason) {
         alert('Failed to save song');
       });
