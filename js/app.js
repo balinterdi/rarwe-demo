@@ -11,7 +11,7 @@ App.Adapter = {
   ajax: function(path, options) {
     var options = options || {};
     options.dataType = 'json';
-    return ic.ajax.request('http://localhost:9393' + path, options);
+    return ic.ajax.request('http://rock-and-roll-with-emberjs-api.herokuapp.com' + path, options);
   }
 }
 
