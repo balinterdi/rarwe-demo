@@ -72,6 +72,11 @@ App.ArtistsRoute = Ember.Route.extend({
       return Ember.RSVP.all(artists);
     });
   },
+
+  afterModel: function() {
+    $(document).attr('title', 'Artists - Rock & Roll');
+  },
+
   actions: {
     createArtist: function() {
       var name = this.get('controller').get('newName');
@@ -103,6 +108,11 @@ App.ArtistRoute = Ember.Route.extend({
 App.ArtistSongsRoute = Ember.Route.extend({
   model: function(params) {
     return this.modelFor('artist').get('songs');
+  },
+
+  afterModel: function(model) {
+    var artistName = this.modelFor('artist').get('name');
+    $(document).attr('title', artistName + ' songs - Rock & Roll');
   },
 
   setupController: function(controller, model) {
