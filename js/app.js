@@ -1,5 +1,15 @@
 App = Ember.Application.create();
 
+function wait(value, t) {
+  return new Ember.RSVP.Promise(function(resolve, _) {
+    window.setTimeout(function() {
+      Ember.run(function() {
+        resolve(value);
+      });
+    }, t);
+  });
+}
+
 Ember.RSVP.configure('onerror', function(error) {
   if (error instanceof Error) {
     Ember.Logger.assert(false, error);
@@ -107,7 +117,8 @@ App.ArtistRoute = Ember.Route.extend({
 
 App.ArtistSongsRoute = Ember.Route.extend({
   model: function(params) {
-    return this.modelFor('artist').get('songs');
+    var songs = this.modelFor('artist').get('songs');
+    return wait(songs, 5 * 1000);
   },
 
   afterModel: function(model) {
