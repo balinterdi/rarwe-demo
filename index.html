@@ -30,6 +30,15 @@
     </div>
   </script>
 
+  <script type="text/x-handlebars" data-template-name="loading">
+    <div class="loading-pane">
+      <div class="loading-message">
+        Loading stuff, please have a cold beer.
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </script>
+
   <script type="text/x-handlebars" data-template-name="artists">
     <div class="col-md-4">
       <div class="list-group">
@@ -63,6 +72,15 @@
 
   <script type="text/x-handlebars" data-template-name="artist">
     {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="artist/loading">
+    <div class="loading-pane">
+      <div class="loading-message">
+        Loading the artist, please have an organic orange juice.
+      </div>
+      <div class="spinner"></div>
+    </div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="artist/songs">

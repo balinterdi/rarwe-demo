@@ -3,6 +3,22 @@ html, body {
     margin: 20px;
 }
 
+.loading-pane {
+  margin: 25px auto;
+}
+
+.loading-message {
+  text-align: center;
+  color: #aaa;
+}
+
+.spinner {
+  background: url('/images/ajax-loader.gif') no-repeat;
+  height: 31px;
+  width: 31px;
+  margin: 0 auto;
+}
+
 .page-header a h1 {
   color: #555;
 }
