@@ -228,6 +228,11 @@ App.ArtistSongsController = Ember.ArrayController.extend({
     return this.get('songCreationStarted') || this.get('length');
   }.property('songCreationStarted', 'length'),
 
+  artistDidChange: function() {
+    this.set('newTitle', '');
+    this.set('songCreationStarted', false);
+  }.observes('artist'),
+
   actions: {
     enableSongCreation: function() {
       this.set('songCreationStarted', true);
