@@ -119,8 +119,6 @@ App.ArtistSongsRoute = Ember.Route.extend({
   setupController: function(controller, model) {
     this._super(controller, model);
     controller.set('artist', this.modelFor('artist'));
-    controller.set('newTitle', '');
-    controller.set('songCreationStarted', false);
   },
 
   actions: {
@@ -229,6 +227,11 @@ App.ArtistSongsController = Ember.ArrayController.extend({
   canCreateSong: function() {
     return this.get('songCreationStarted') || this.get('length');
   }.property('songCreationStarted', 'length'),
+
+  artistDidChange: function() {
+    this.set('newTitle', '');
+    this.set('songCreationStarted', false);
+  }.observes('artist'),
 
   actions: {
     enableSongCreation: function() {
