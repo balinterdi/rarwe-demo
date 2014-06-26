@@ -119,6 +119,8 @@ App.ArtistSongsRoute = Ember.Route.extend({
   setupController: function(controller, model) {
     this._super(controller, model);
     controller.set('artist', this.modelFor('artist'));
+    controller.set('newTitle', '');
+    controller.set('songCreationStarted', false);
   },
 
   actions: {
