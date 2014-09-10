@@ -168,12 +168,9 @@ App.StarRatingComponent = Ember.Component.extend({
   fullStars: Ember.computed.alias('rating'),
 
   stars: function() {
-    var ratings = [];
     var fullStars = this.starRange(1, this.get('fullStars'), 'full');
     var emptyStars = this.starRange(this.get('fullStars') + 1, this.get('numStars'), 'empty');
-    Array.prototype.push.apply(ratings, fullStars);
-    Array.prototype.push.apply(ratings, emptyStars);
-    return ratings;
+    return fullStars.concat(emptyStars);
   }.property('fullStars', 'numStars'),
 
   starRange: function(start, end, type) {
