@@ -1,0 +1,71 @@
+html, body {
+  margin: 20px;
+}
+
+.loading-pane {
+  margin: 25px auto;
+}
+
+.loading-message {
+  text-align: center;
+  color: #aaa;
+}
+
+.spinner {
+  background: url('/images/ajax-loader.gif') no-repeat;
+  height: 31px;
+  width: 31px;
+  margin: 0 auto;
+}
+
+.page-header a h1 {
+  color: #555;
+}
+
+.empty-list {
+  min-height: 100px;
+  text-align: center;
+}
+
+.empty-list .empty-message {
+  display: inline-block;
+  color: #555;
+  line-height: 100px;
+}
+
+.artist-link .pointer {
+  float: right;
+  display: none;
+}
+
+.artist-link.active .pointer {
+  display: block;
+}
+
+.new-artist {
+  width: 70%;
+}
+
+.new-artist-button {
+  margin-left: 2em;
+  padding: 3px 10px;
+}
+
+.new-song {
+  width: 50%;
+}
+
+.new-song-button {
+  margin-left: 20px;
+}
+
+.rating-panel {
+  display: inline-block;
+  float: right;
+}
+
+.rating-star {
+  display: inline;
+  float: left;
+  margin-left: 3px;
+}
