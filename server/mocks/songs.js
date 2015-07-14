@@ -45,11 +45,10 @@ module.exports = function(app) {
   });
 
   songsRouter.put('/:id', function(req, res) {
-    res.send({
-      'songs': {
-        id: req.params.id
-      }
-    });
+    var song = req.body.song;
+    res.status(201).send({
+      song: song
+    }).end();
   });
 
   songsRouter.delete('/:id', function(req, res) {

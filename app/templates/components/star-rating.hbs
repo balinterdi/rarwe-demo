@@ -1,6 +1,5 @@
-{{#each stars}}
-  <span
-    {{bind-attr class=":star-rating :glyphicon full:glyphicon-star:glyphicon-star-empty"}}
-    {{action "setRating" rating}}>
+{{#each stars as |star|}}
+  <span class="star-rating glyphicon {{if star.full 'glyphicon-star' 'glyphicon-star-empty'}}"
+        {{action "setRating" star.rating}}>
   </span>
 {{/each}}
