@@ -15,6 +15,13 @@ export default Ember.Route.extend({
     controller.set('band', this.modelFor('bands.band'));
   },
 
+  resetController: function(controller) {
+    controller.setProperties({
+      newTitle: '',
+      songCreationStarted: false
+    });
+  },
+
   actions: {
     createSong: function() {
       var controller = this.get('controller'),

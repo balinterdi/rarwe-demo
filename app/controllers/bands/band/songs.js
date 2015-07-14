@@ -27,11 +27,6 @@ export default Ember.Controller.extend({
     return this.get('songCreationStarted') || this.get('model.length');
   }.property('songCreationStarted', 'model.length'),
 
-  bandDidChange: function() {
-    this.set('newTitle', '');
-    this.set('songCreationStarted', false);
-  }.observes('band'),
-
   actions: {
     enableSongCreation: function() {
       this.set('songCreationStarted', true);
