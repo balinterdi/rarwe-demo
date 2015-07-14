@@ -1,4 +1,4 @@
-var artists = [
+var bands = [
   { id: 1, name: 'Pearl Jam', songs: [1, 2, 3, 4, 5] },
   { id: 2, name: 'Led Zeppelin', songs: [6, 7, 8] },
   { id: 3, name: 'Foo Fighters', songs: [9] },
@@ -17,62 +17,62 @@ var songs = [
   { id: 9, title: 'Pretender', rating: 3 }
 ];
 
-var nextArtistId = artists.length + 1;
+var nextBandId = bands.length + 1;
 
-function findArtist(id) {
-  var foundArtist;
-  artists.forEach(function(artist) {
-    if (artist.id === id) {
-      foundArtist = artist;
+function findBand(id) {
+  var foundBand;
+  bands.forEach(function(band) {
+    if (band.id === id) {
+      foundBand = band;
       return;
     }
   });
 
-  return foundArtist;
+  return foundBand;
 }
 
 module.exports = function(app) {
   var express = require('express');
-  var artistsRouter = express.Router();
+  var bandsRouter = express.Router();
   var bodyParser = require('body-parser');
 
   app.use(bodyParser.json());
 
-  artistsRouter.get('/', function(req, res) {
+  bandsRouter.get('/', function(req, res) {
     res.send({
-      artists: artists,
+      bands: bands,
       songs: songs
     });
   });
 
-  artistsRouter.post('/', function(req, res) {
-    var artist = req.body.artist;
-    artist.id = nextArtistId;
+  bandsRouter.post('/', function(req, res) {
+    var band = req.body.band;
+    band.id = nextBandId;
     res.status(201).send({
-      artist: artist
+      band: band
     }).end();
-    nextArtistId += 1;
+    nextBandId += 1;
   });
 
-  artistsRouter.get('/:id', function(req, res) {
+  bandsRouter.get('/:id', function(req, res) {
     var id = req.params.id;
-    var artist = findArtist(id);
+    var band = findBand(id);
     res.send({
-      'artist': (artist || {})
+      band: (band || {})
     });
   });
 
-  artistsRouter.put('/:id', function(req, res) {
+  bandsRouter.put('/:id', function(req, res) {
     res.send({
-      'artists': {
+      'bands': {
         id: req.params.id
       }
     });
   });
 
-  artistsRouter.delete('/:id', function(req, res) {
+  bandsRouter.delete('/:id', function(req, res) {
     res.status(204).end();
   });
 
-  app.use('/api/artists', artistsRouter);
+  app.use('/api/bands', bandsRouter);
 };

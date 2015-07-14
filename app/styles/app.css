@@ -33,20 +33,20 @@ html, body {
   line-height: 100px;
 }
 
-.artist-link .pointer {
+.band-link .pointer {
   float: right;
   display: none;
 }
 
-.artist-link.active .pointer {
+.band-link.active .pointer {
   display: block;
 }
 
-.new-artist {
+.new-band {
   width: 70%;
 }
 
-.new-artist-button {
+.new-band-button {
   margin-left: 2em;
   padding: 3px 10px;
 }

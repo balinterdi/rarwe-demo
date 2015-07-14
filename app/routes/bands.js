@@ -2,24 +2,24 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function() {
-    return this.store.findAll('artist');
+    return this.store.findAll('band');
   },
 
   afterModel: function() {
-    Ember.$(document).attr('title', 'Artists - Rock & Roll');
+    Ember.$(document).attr('title', 'Bands - Rock & Roll');
   },
 
   actions: {
-    createArtist: function() {
+    createBand: function() {
       var route = this,
           controller = this.get('controller');
 
-      var artist = this.store.createRecord('artist', {
+      var band = this.store.createRecord('band', {
         name: controller.get('newName')
       });
-      artist.save().then(function() {
+      band.save().then(function() {
         controller.set('newName', '');
-        route.transitionTo('artist.songs', artist);
+        route.transitionTo('bands.band.songs', band);
       })
       ['catch'](function(error) {
         console.error(error);

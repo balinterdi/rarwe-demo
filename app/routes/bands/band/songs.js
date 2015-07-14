@@ -2,27 +2,27 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function() {
-    return this.modelFor('artist').get('songs');
+    return this.modelFor('bands.band').get('songs');
   },
 
   afterModel: function() {
-    var artistName = this.modelFor('artist').get('name');
-    Ember.$(document).attr('title', artistName + ' songs - Rock & Roll');
+    var bandName = this.modelFor('bands.band').get('name');
+    Ember.$(document).attr('title', bandName + ' songs - Rock & Roll');
   },
 
   setupController: function(controller, model) {
     this._super(controller, model);
-    controller.set('artist', this.modelFor('artist'));
+    controller.set('band', this.modelFor('bands.band'));
   },
 
   actions: {
     createSong: function() {
       var controller = this.get('controller'),
-          artist = this.modelFor('artist');
+          band = this.modelFor('bands.band');
 
       var song = this.store.createRecord('song', {
         title: controller.get('newTitle'),
-        artist: artist
+        band: band
       });
       song.save().then(function() {
         controller.set('newTitle', '');

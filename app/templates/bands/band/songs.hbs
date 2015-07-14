@@ -1,6 +1,6 @@
 {{#if canCreateSong}}
   <div class="list-group-item">
-    {{input type="text" class="new-artist" placeholder=newSongPlaceholder value=newTitle insert-newline="createSong" }}
+    {{input type="text" class="new-band" placeholder=newSongPlaceholder value=newTitle insert-newline="createSong" }}
     <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}}>Add</button>
     {{view 'select' content=sortOptions
                         value=selectedSort
@@ -18,7 +18,7 @@
   {{#unless canCreateSong}}
     <div class="list-group-item empty-list">
       <div class="empty-message">
-        There are no {{artist.name}} songs. Why don't you <a href="#" {{action "enableSongCreation"}}>create one?</a>
+        There are no {{band.name}} songs. Why don't you <a href="#" {{action "enableSongCreation"}}>create one?</a>
       </div>
     </div>
   {{/unless}}

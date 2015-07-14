@@ -1,13 +1,13 @@
 <div class="col-md-4">
   <div class="list-group">
     <div class="list-group-item">
-      {{input type="text" class="new-artist" placeholder="New Artist" value=newName insert-newline="createArtist" }}
-      <button class="btn btn-primary btn-sm new-artist-button" {{action "createArtist"}}
+      {{input type="text" class="new-band" placeholder="New band" value=newName insert-newline="createBand" }}
+      <button class="btn btn-primary btn-sm new-band-button" {{action "createBand"}}
         disabled={{disabled}}>Add</button>
     </div>
-    {{#each model as |artist|}}
-      {{#link-to "artist.songs" artist class="list-group-item artist-link"}}
-        {{artist.name}}
+    {{#each model as |band|}}
+      {{#link-to "bands.band.songs" band class="list-group-item band-link"}}
+        {{band.name}}
         <span class="pointer glyphicon glyphicon-chevron-right"></span>
       {{/link-to}}
     {{/each}}

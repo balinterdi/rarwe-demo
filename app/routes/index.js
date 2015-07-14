@@ -1,9 +1,8 @@
 import Ember from 'ember';
 
-var IndexRoute = Ember.Route.extend({
+export default Ember.Route.extend({
   beforeModel: function() {
-    this.transitionTo('artists');
+    this.transitionTo('bands');
   }
 });
 
-export default IndexRoute;
