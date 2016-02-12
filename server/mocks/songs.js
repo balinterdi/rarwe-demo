@@ -46,6 +46,7 @@ module.exports = function(app) {
 
   songsRouter.put('/:id', function(req, res) {
     var song = req.body.song;
+    song.id = req.params.id;
     res.status(201).send({
       song: song
     }).end();

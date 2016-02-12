@@ -1,13 +1,4 @@
 /* jshint node: true */
-var contentSecurityPolicy = {
-  'default-src': "'none'",
-  'script-src': "'self' www.google-analytics.com:*",
-  'font-src': "'self'",
-  'connect-src': "'self' localhost:* api.rockandrollwithemberjs.com:*",
-  'img-src': "'self' www.google-analytics.com:*",
-  'style-src': "'self' 'unsafe-inline'",
-  'media-src': "'self'"
-};
 
 module.exports = function(environment) {
   var ENV = {
@@ -25,8 +16,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    },
-    contentSecurityPolicy: contentSecurityPolicy
+    }
   };
 
   if (environment === 'development') {
@@ -35,9 +25,6 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.contentSecurityPolicy = contentSecurityPolicy;
-    ENV.contentSecurityPolicy['script-src'] = ENV.contentSecurityPolicy['script-src'] + " 'unsafe-inline'";
-    ENV.apiHost = 'rock-and-roll-with-emberjs-api.herokuapp.com';
   }
 
   if (environment === 'test') {
