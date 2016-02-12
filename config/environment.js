@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'rock-and-roll',
+    modulePrefix: 'rarwe-demo',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
