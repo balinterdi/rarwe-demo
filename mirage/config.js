@@ -23,8 +23,12 @@ export default function() {
     this.del('/posts/:id');
   */
   this.get('/bands');
-  this.get('/bands/:id');
   this.post('/bands');
+  this.get('/bands/:id');
+  this.get('/bands/:id/songs', function(schema, request) {
+    let bandId = request.params.id;
+    return schema.song.where({ bandId });
+  });
 
   this.get('/songs');
   this.post('/songs');
