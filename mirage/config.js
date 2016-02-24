@@ -30,6 +30,13 @@ export default function() {
     return schema.song.where({ bandId });
   });
 
-  this.get('/songs');
   this.post('/songs');
+  this.put('/songs/:id', function(schema, request) {
+    let id = request.params.id;
+    let attrs = JSON.parse(request.requestBody).song;
+
+    delete attrs.band;
+
+    return schema.song.find(id).update(attrs);
+  });
 }
