@@ -16,7 +16,7 @@ export default Ember.Route.extend({
   actions: {
     createSong: function() {
       var controller = this.get('controller'),
-          band = this.get('model');
+          band = controller.get('model');
 
       var song = this.store.createRecord('song', {
         title: controller.get('newTitle'),
