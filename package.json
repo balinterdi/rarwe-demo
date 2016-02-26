@@ -43,6 +43,7 @@
     "ember-pagefront": "0.10.10",
     "ember-resolver": "^2.0.3",
     "ember-truth-helpers": "1.2.0",
+    "ember-watson": "^0.8.0",
     "loader.js": "^4.0.0"
   }
 }

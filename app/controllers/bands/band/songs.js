@@ -10,24 +10,24 @@ export default Ember.Controller.extend({
   ],
   selectedSort: 'rating:desc,title:asc',
 
-  sortProperties: function() {
-    var selected = this.get('selectedSort');
+  sortProperties: Ember.computed('selectedSort', function() {
+    let selected = this.get('selectedSort');
     return (selected ? selected.split(',') : ['rating:desc', 'title:asc']);
-  }.property('selectedSort'),
+  }),
 
   sortedSongs: Ember.computed.sort('model.songs', 'sortProperties'),
 
-  newSongPlaceholder: function() {
+  newSongPlaceholder: Ember.computed('model.name', function() {
     return 'New ' + this.get('model.name') + ' song';
-  }.property('model.name'),
+  }),
 
   songCreationStarted: false,
-  canCreateSong: function() {
+  canCreateSong: Ember.computed('songCreationStarted', 'model.songs.length', function() {
     return this.get('songCreationStarted') || this.get('model.songs.length');
-  }.property('songCreationStarted', 'model.songs.length'),
+  }),
 
   actions: {
-    enableSongCreation: function() {
+    enableSongCreation() {
       this.set('songCreationStarted', true);
     }
   }

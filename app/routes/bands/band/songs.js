@@ -1,12 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  afterModel: function() {
-    var bandName = this.modelFor('bands.band').get('name');
+  afterModel() {
+    let bandName = this.modelFor('bands.band').get('name');
     Ember.$(document).attr('title', bandName + ' songs - Rock & Roll');
   },
 
-  resetController: function(controller) {
+  resetController(controller) {
     controller.setProperties({
       newTitle: '',
       songCreationStarted: false
@@ -14,11 +14,11 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    createSong: function() {
-      var controller = this.get('controller'),
+    createSong() {
+      let controller = this.get('controller'),
           band = controller.get('model');
 
-      var song = this.store.createRecord('song', {
+      let song = this.store.createRecord('song', {
         title: controller.get('newTitle'),
         band: band
       });
@@ -30,9 +30,8 @@ export default Ember.Route.extend({
       });
     },
 
-    setRating: function(params) {
-      var song = params.item,
-          rating = params.rating;
+    setRating(params) {
+      let { item: song, rating } = params;
 
       if (song.get('rating') === rating) {
         rating = null;

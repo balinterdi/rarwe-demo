@@ -1,20 +1,20 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function() {
+  model() {
     return this.store.findAll('band');
   },
 
-  afterModel: function() {
+  afterModel() {
     Ember.$(document).attr('title', 'Bands - Rock & Roll');
   },
 
   actions: {
-    createBand: function() {
-      var route = this,
+    createBand() {
+      let route = this,
           controller = this.get('controller');
 
-      var band = this.store.createRecord('band', {
+      let band = this.store.createRecord('band', {
         name: controller.get('newName')
       });
       band.save().then(function() {
