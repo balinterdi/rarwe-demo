@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  band: null,
   sortOptions: [
     { id: "rating:desc,title:asc", name: "Best" },
     { id: "title:asc", name: "By title (asc)" },
@@ -16,16 +15,16 @@ export default Ember.Controller.extend({
     return (selected ? selected.split(',') : ['rating:desc', 'title:asc']);
   }.property('selectedSort'),
 
-  sortedSongs: Ember.computed.sort('model', 'sortProperties'),
+  sortedSongs: Ember.computed.sort('model.songs', 'sortProperties'),
 
   newSongPlaceholder: function() {
-    return 'New ' + this.get('band.name') + ' song';
-  }.property('band.name'),
+    return 'New ' + this.get('model.name') + ' song';
+  }.property('model.name'),
 
   songCreationStarted: false,
   canCreateSong: function() {
-    return this.get('songCreationStarted') || this.get('model.length');
-  }.property('songCreationStarted', 'model.length'),
+    return this.get('songCreationStarted') || this.get('model.songs.length');
+  }.property('songCreationStarted', 'model.songs.length'),
 
   actions: {
     enableSongCreation: function() {
