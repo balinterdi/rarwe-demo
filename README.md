@@ -1,30 +1,48 @@
-Rock & Roll with Ember.js
-=========================
+Rock & Roll with Ember.js - Demo version
+========================================
 
-The Ember.js app I build during the introductory screencast series to my mailing list.
+This app is a reduced version of the app that is built in [my Rock and Roll with Ember.js book][1].
 
-The code for the backend server in the last episode lives at [balinterdi/rock-and-roll-api](https://github.com/balinterdi/rock-and-roll-api).
+It demoes a simple music catalogue where you can create bands and songs, and
+sort and rate the latter. Please don't try to use it to actually create an
+inventory of your music. All the data is stored in memory only and destroyed
+upon refresh.
 
-### Want more Ember stuff?
+You can check out the running app at [https://rarwe-demo.pagefrontapp.com][2].
 
-If you would like to learn more about Ember.js and receive valuable content regularly, you can [sign up here](http://emberjs.balinterdi.com).
+### Tech specs
 
-### Tips on working along
+The app aims to be running on a relatively recent, stable version of Ember.js (now
+that the LTS versions are announced, it will probably run on the latest LTS
+version) and contain several of the features the full app does.
 
-My goal with releasing the code for the screencast is to help you work along as you watch the episodes. Let me share a few tips that can also help.
+* It uses a relatively recent version of Ember Data.
+* There is no backend. The app uses the fantastic [ember-cli-mirage][3] addon to
+  create some seed data and to mock out server responses. All data is ephemeral
+  and destroyed on reload.
+* It strives to show idiomatic Ember and use ES2015 features, like
+  destructuring and `let`.
+* It is deployed on the [PageFront][4] hosting platform.
 
-#### Git tags
+### Found a bug?
 
-The repository is properly tagged for each episode. If you want to jump directly to the end of Episode 3 (which happens to also be the beginning of Episode 4), just do `git checkout episode-3`.
-
-#### App server
-
-There is a very simple application server implemented in config.ru. It implements a simple file server and adds a convenience for `index.html` files so that they can be served without having to append `index.html` to the end of the URL. To run it, just do `rackup` in the root of the repository. This is going to launch the app server on port 9292 so you can then load the application on `http://localhost:9292`.
+That's great, please [submit a pull request][5].
 
 ### Licensing
 
-I would like you to do anything you wish with this code as long as you don't sell it, or anything that uses it (e.g a screencast). To that end, I chose the GPL v2 License which you find here in the repository and which is nicely summarized on [choosealicense.com](http://choosealicense.com/licenses/).
+I would like you to do anything you wish with this code as long as you don't
+sell it, or anything that uses it (e.g a screencast). To that end, I chose the
+GPL v2 License which you find here in the repository and which is nicely
+summarized on [choosealicense.com](http://choosealicense.com/licenses/).
 
-Feel free to fork it, play with it, share it with friends or use some code snippets in a presentation while you keep the license and the copyright notice in the repository.
+Feel free to fork it, play with it, share it with friends or use some code
+snippets in a presentation while you keep the license and the copyright notice
+in the repository.
 
-Copyright (c) 2013 [Balint Erdi](http://balinterdi.com)
+Copyright (c) 2016 [Balint Erdi](http://balinterdi.com)
+
+[1]: http://rockandrollwithemberjs.com
+[2]: https://rarwe-demo.pagefrontapp.com
+[3]: http://www.ember-cli-mirage.com/
+[4]: https://www.pagefronthq.com/
+[5]: https://github.com/balinterdi/rarwe-demo/pulls
