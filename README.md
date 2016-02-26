@@ -1,7 +1,7 @@
 Rock & Roll with Ember.js - Demo version
 ========================================
 
-This app is a reduced version of the app that is built in [my Rock and Roll with Ember.js book][1].
+This app is a smaller version of the app that is built in [my Rock and Roll with Ember.js book][1].
 
 It demoes a simple music catalogue where you can create bands and songs, and
 sort and rate the latter. Please don't try to use it to actually create an
