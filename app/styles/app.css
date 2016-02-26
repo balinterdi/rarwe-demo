@@ -69,3 +69,14 @@ html, body {
   float: left;
   margin-left: 3px;
 }
+
+.book-promo {
+  width: 600px;
+  margin: 0 auto;
+  height: 50px;
+  line-height: 50px;
+}
+
+.book-promo .link {
+  margin-left: 10px;
+}
