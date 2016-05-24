@@ -27,7 +27,7 @@ export default function() {
   this.get('/bands/:id');
   this.get('/bands/:id/songs', function(schema, request) {
     let bandId = request.params.id;
-    return schema.song.where({ bandId });
+    return schema.songs.where({ bandId });
   });
 
   this.post('/songs');
@@ -37,6 +37,6 @@ export default function() {
 
     delete attrs.band;
 
-    return schema.song.find(id).update(attrs);
+    return schema.songs.find(id).update(attrs);
   });
 }

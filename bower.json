@@ -6,7 +6,7 @@
     "ember-cli-test-loader": "0.2.2",
     "ember-qunit-notifications": "0.1.0",
     "bootstrap": "~3.3.5",
-    "pretender": "~0.10.1",
-    "Faker": "~3.0.0"
+    "pretender": "~1.1.0",
+    "Faker": "~3.1.0"
   }
 }
