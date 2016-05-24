@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  newTitle: '',
   sortOptions: [
     { id: "rating:desc,title:asc", name: "Best" },
     { id: "title:asc", name: "By title (asc)" },
@@ -30,7 +31,10 @@ export default Ember.Controller.extend({
     enableSongCreation() {
       this.set('songCreationStarted', true);
     }
-  }
+  },
 
+  disabled: Ember.computed('newTitle', function() {
+    return Ember.isEmpty(this.get('newTitle'));
+  })
 });
 
