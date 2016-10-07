@@ -10,8 +10,6 @@ addons:
 language: node_js
 node_js:
   - "0.12"
-env:
-    - EMBER_VERSION=release
 
 before_install:
     # starting a GUI to run tests, per https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-a-GUI
