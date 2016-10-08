@@ -7,6 +7,5 @@
   ],
   "launch_in_dev": [
     "Chrome"
-  ],
-  "timeout": 120
+  ]
 }
