@@ -24,4 +24,3 @@ install:
     - bower install
 script:
     - ember test --server
-    - exit $?
