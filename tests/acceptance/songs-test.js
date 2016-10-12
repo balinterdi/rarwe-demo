@@ -27,6 +27,7 @@ test('List songs for a band', function(assert) {
   click('a:contains("Tool")');
 
   andThen(function() {
+    percySnapshot('list-songs-for-band');
     assert.equal(Ember.$('.song').length, 3, "All songs for the selected band are displayed");
     assert.equal(Ember.$('.song:contains("46 & 2")').length, 1, "The first song is displayed");
   });
