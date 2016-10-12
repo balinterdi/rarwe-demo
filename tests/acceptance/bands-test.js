@@ -14,8 +14,8 @@ test('List bands', function(assert) {
 
   andThen(function() {
     assert.equal(Ember.$('.band-link').length, 2, "All bands have a corresponding link");
-    assert.ok(Ember.$('.band-link:contains("Tool")'), "Tool is displayed");
-    assert.ok(Ember.$('.band-link:contains("Pearl Jam")'), "Pearl Jam is displayed");
+    assert.equal(Ember.$('.band-link:contains("Tool")').length, 1, "Tool is displayed");
+    assert.ok(Ember.$('.band-link:contains("Pearl Jam")').length, 1, "Pearl Jam is displayed");
     percySnapshot('list-bands');
   });
 });
