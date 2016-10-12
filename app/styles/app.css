@@ -80,3 +80,7 @@ html, body {
 .book-promo .link {
   margin-left: 10px;
 }
+
+#song-sorting-select {
+  width: inherit;
+}
