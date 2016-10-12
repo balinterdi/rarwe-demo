@@ -10,7 +10,7 @@
   </div>
 {{/if}}
 {{#each sortedSongs as |song|}}
-  <div class="list-group-item">
+  <div class="list-group-item song">
     {{song.title}}
     {{star-rating item=song rating=song.rating maxRating=5 setAction="setRating"}}
   </div>
