@@ -53,10 +53,6 @@ amdefine@>=0.0.4:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.0.tgz#fd17474700cb5cc9c2b709f0be9d23ce3c198c33"
 
-ansi-regex@*, ansi-regex@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.0.0.tgz#c5061b6e0ef8a81775e50f5d66151bf6bf371107"
-
 ansi-regex@^0.2.0, ansi-regex@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-0.2.1.tgz#0d8e946967a3d8143f93e24e298525fc1b2235f9"
@@ -64,6 +60,10 @@ ansi-regex@^0.2.0, ansi-regex@^0.2.1:
 ansi-regex@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-1.1.1.tgz#41c847194646375e6a1a5d10c3ca054ef9fc980d"
+
+ansi-regex@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.0.0.tgz#c5061b6e0ef8a81775e50f5d66151bf6bf371107"
 
 ansi-styles@^1.1.0:
   version "1.1.0"
@@ -1498,9 +1498,9 @@ ember-cli-deploy-display-revisions@0.1.0:
     ember-cli-deploy-plugin "0.2.0"
     moment "2.10.6"
 
-"ember-cli-deploy-gzip@git+https://github.com/pagefront/ember-cli-deploy-gzip#d0cbd7c43c4f1c963663912e688fdbcb9f26da88":
+ember-cli-deploy-gzip@pagefront/ember-cli-deploy-gzip#d0cbd7c43c4f1c963663912e688fdbcb9f26da88:
   version "0.1.0"
-  resolved "git+https://github.com/pagefront/ember-cli-deploy-gzip#d0cbd7c43c4f1c963663912e688fdbcb9f26da88"
+  resolved "https://codeload.github.com/pagefront/ember-cli-deploy-gzip/tar.gz/d0cbd7c43c4f1c963663912e688fdbcb9f26da88"
   dependencies:
     chalk "^1.0.0"
     core-object "^1.1.0"
@@ -1510,9 +1510,9 @@ ember-cli-deploy-display-revisions@0.1.0:
     redis "^0.12.1"
     rsvp "^3.0.18"
 
-"ember-cli-deploy-manifest@git+https://github.com/pagefront/ember-cli-deploy-manifest#1181991a23ff1548a8fd588e3f8787e13562ed18":
+ember-cli-deploy-manifest@pagefront/ember-cli-deploy-manifest#1181991a23ff1548a8fd588e3f8787e13562ed18:
   version "0.1.0"
-  resolved "git+https://github.com/pagefront/ember-cli-deploy-manifest#1181991a23ff1548a8fd588e3f8787e13562ed18"
+  resolved "https://codeload.github.com/pagefront/ember-cli-deploy-manifest/tar.gz/1181991a23ff1548a8fd588e3f8787e13562ed18"
   dependencies:
     chalk "^1.0.0"
     core-object "^1.1.0"
@@ -1866,9 +1866,9 @@ ember-pagefront@0.10.10:
     open "0.0.5"
     prompt "^0.2.14"
 
-ember-percy@1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.3.tgz#42bad9f5307c54ac05a247c9ee1e6c9a4b221728"
+ember-percy:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.4.tgz#1bdcecfe25ab444a380150416b836527e0ebd6ad"
   dependencies:
     body-parser "^1.15.0"
     ember-cli-babel "^5.1.5"
@@ -4616,7 +4616,7 @@ spdx-expression-parse@~1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/spdx-expression-parse/-/spdx-expression-parse-1.0.4.tgz#9bdf2f20e1f40ed447fbe273266191fced51626c"
 
-spdx-license-ids@*, spdx-license-ids@^1.0.0, spdx-license-ids@^1.0.2:
+spdx-license-ids@^1.0.0, spdx-license-ids@^1.0.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-1.2.2.tgz#c9df7a3424594ade6bd11900d596696dc06bac57"
 
@@ -4693,12 +4693,6 @@ stringstream@~0.0.4:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
 
-strip-ansi@*, strip-ansi@^3.0.0, strip-ansi@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
-  dependencies:
-    ansi-regex "^2.0.0"
-
 strip-ansi@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-0.3.0.tgz#25f48ea22ca79187f3174a4db8759347bb126220"
@@ -4710,6 +4704,12 @@ strip-ansi@^2.0.1:
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-2.0.1.tgz#df62c1aa94ed2f114e1d0f21fd1d50482b79a60e"
   dependencies:
     ansi-regex "^1.0.0"
+
+strip-ansi@^3.0.0, strip-ansi@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
+  dependencies:
+    ansi-regex "^2.0.0"
 
 strip-ansi@~0.1.0:
   version "0.1.1"
