@@ -1,8 +1,8 @@
 import DS from 'ember-data';
-// import ENV from 'rarwe/config/environment';
+import config from 'rarwe-demo/config/environment';
 
 export default DS.JSONAPIAdapter.extend({
-  host: 'http://json-api.rockandrollwithemberjs.com'
+  host: config.apiHost
 });
 
 // API lived at http://rock-and-roll-with-emberjs-api.herokuapp.com
