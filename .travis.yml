@@ -9,7 +9,11 @@ addons:
       - google-chrome-stable
 language: node_js
 node_js:
-  - "0.12"
+  - "4"
+
+cache:
+  directories:
+    - node_modules
 
 before_install:
     # starting a GUI to run tests, per https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-a-GUI
