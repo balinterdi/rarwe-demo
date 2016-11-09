@@ -9,8 +9,8 @@
 
     {{content-for 'head'}}
 
-    <link rel="stylesheet" href="assets/vendor.css">
-    <link rel="stylesheet" href="assets/rarwe-demo.css">
+    <link rel="stylesheet" href="{{rootURL}}assets/vendor.css">
+    <link rel="stylesheet" href="{{rootURL}}assets/rarwe-demo.css">
 
     {{content-for 'head-footer'}}
     <script>
@@ -32,8 +32,8 @@
     </nav>
     {{content-for 'body'}}
 
-    <script src="assets/vendor.js"></script>
-    <script src="assets/rarwe-demo.js"></script>
+    <script src="{{rootURL}}assets/vendor.js"></script>
+    <script src="{{rootURL}}assets/rarwe-demo.js"></script>
     <script src="js/events.js"></script>
 
     {{content-for 'body-footer'}}
