@@ -1,16 +1,16 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  afterModel() {
-    let bandName = this.modelFor('bands.band').get('name');
-    Ember.$(document).attr('title', bandName + ' songs - Rock & Roll');
-  },
-
   resetController(controller) {
     controller.setProperties({
       newTitle: '',
       songCreationStarted: false
     });
+  },
+
+  title() {
+    let bandName = this.modelFor('bands.band').get('name');
+    return `${bandName} songs - Rock and Roll`;
   },
 
   actions: {

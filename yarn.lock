@@ -1641,6 +1641,12 @@ ember-cli-deploy@0.5.1:
     silent-error "^1.0.0"
     sync-exec "^0.5.0"
 
+ember-cli-document-title:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/ember-cli-document-title/-/ember-cli-document-title-0.3.3.tgz#0441d64e3ab7a64b220f8c54a144ab927d6138af"
+  dependencies:
+    ember-cli-babel "^5.1.6"
+
 ember-cli-fastboot:
   version "1.0.0-beta.12"
   resolved "https://registry.yarnpkg.com/ember-cli-fastboot/-/ember-cli-fastboot-1.0.0-beta.12.tgz#be18a23c2307f6b7f046ba2e98cbaaffe5c3c033"
