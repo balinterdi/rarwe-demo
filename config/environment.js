@@ -22,8 +22,10 @@ module.exports = function(environment) {
       // when it is created
     },
     'ember-cli-mirage': {
-      enabled: true,
-      logging: true
+      enabled: false,
+    },
+    fastboot: {
+      hostWhitelist: ['rarwe-demo.pagefrontapp.com', /^localhost:\d+$/]
     }
   };
 
