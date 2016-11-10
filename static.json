@@ -1,0 +1,23 @@
+{
+  "root": "dist/",
+  "https_only": false,
+  "clean_urls": true,
+  "routes": {
+    "/**": "index.html"
+  },
+  "headers": {
+    "/**": {
+      "Cache-Control": "private, no-store, no-cache, must-revalidate, proxy-revalidate",
+      "Pragma": "no-cache",
+      "Expires": "Sat, 05 Nov 1955 00:00:00 PST",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains;",
+      "X-Download-Options": "noopen",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "SAMEORIGIN",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "/assets/**": { "Cache-Control": "public, max-age=512000" },
+    "/robots.txt": { "Cache-Control": "public, max-age=512000" },
+    "/crossdomain.xml": { "Cache-Control": "public, max-age=512000" }
+  }
+}
