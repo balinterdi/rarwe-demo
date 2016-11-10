@@ -5,9 +5,7 @@ export default Ember.Route.extend({
     return this.store.findAll('band');
   },
 
-  afterModel() {
-    Ember.$(document).attr('title', 'Bands - Rock & Roll');
-  },
+  titleToken: 'Bands',
 
   actions: {
     createBand() {

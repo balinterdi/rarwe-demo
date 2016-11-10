@@ -1,4 +1,11 @@
-import { ActiveModelSerializer } from 'ember-cli-mirage';
+import { JSONAPISerializer } from 'ember-cli-mirage';
 
-export default ActiveModelSerializer.extend({
+export default JSONAPISerializer.extend({
+  links(author) {
+    return {
+      'posts': {
+        related: `/api/authors/${author.id}/posts`
+      }
+    };
+  }
 });

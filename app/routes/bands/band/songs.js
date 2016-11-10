@@ -1,9 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  fastboot: Ember.inject.service(),
+
   afterModel() {
-    let bandName = this.modelFor('bands.band').get('name');
-    Ember.$(document).attr('title', bandName + ' songs - Rock & Roll');
+    if (this.get('fastboot.isFastBoot')) {
+      let band = this.modelFor('bands.band');
+      return band.get('songs');
+    }
   },
 
   resetController(controller) {
@@ -11,6 +15,11 @@ export default Ember.Route.extend({
       newTitle: '',
       songCreationStarted: false
     });
+  },
+
+  title() {
+    let bandName = this.modelFor('bands.band').get('name');
+    return `${bandName} songs - Rock and Roll`;
   },
 
   actions: {
