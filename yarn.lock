@@ -15,12 +15,6 @@ acorn@^3.1.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
 
-active-model-adapter@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/active-model-adapter/-/active-model-adapter-2.1.1.tgz#ec088f391dc1cd4f163ad9ec0ecf61c69bc53613"
-  dependencies:
-    ember-cli-babel "^5.1.6"
-
 after@0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.1.tgz#ab5d4fb883f596816d3515f8f791c0af486dd627"
