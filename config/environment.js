@@ -25,7 +25,7 @@ module.exports = function(environment) {
       enabled: false,
     },
     fastboot: {
-      hostWhitelist: ['demo.rockandrollwithemberjs.com', /^localhost:\d+$/]
+      hostWhitelist: ['demo.rockandrollwithemberjs.com', 'rarwe-demo.herokuapp.com', /^localhost:\d+$/]
     }
   };
 
