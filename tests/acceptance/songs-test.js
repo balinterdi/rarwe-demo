@@ -7,12 +7,10 @@ moduleForAcceptance('Acceptance | Songs', {
     let tool = server.create('band', {
       id: 1,
       name: 'Tool',
-      links: { songs: '/api/bands/1/songs' }
     });
     server.create('band', {
       id: 2,
       name: 'Pearl Jam',
-      links: { songs: '/api/bands/2/songs' }
     });
 
     server.create('song', { title: '46 & 2', bandId: tool.id });

@@ -4,8 +4,8 @@ export default Ember.Route.extend({
   fastboot: Ember.inject.service(),
 
   afterModel() {
-    let band = this.modelFor('bands.band');
     if (this.get('fastboot.isFastBoot')) {
+      let band = this.modelFor('bands.band');
       return band.get('songs');
     }
   },
