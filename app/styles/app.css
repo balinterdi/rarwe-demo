@@ -18,7 +18,7 @@ html, body {
   margin: 0 auto;
 }
 
-.page-header a h1 {
+.color-grey {
   color: #555;
 }
 
@@ -60,12 +60,10 @@ html, body {
 }
 
 .rating-panel {
-  display: inline-block;
   float: right;
 }
 
 .rating-star {
-  display: inline;
   float: left;
   margin-left: 3px;
 }

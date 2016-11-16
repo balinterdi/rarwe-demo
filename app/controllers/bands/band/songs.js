@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
     { id: "title:asc", name: "By title (asc)" },
     { id: "title:desc", name: "By title (desc)" },
     { id: "rating:asc", name: "By rating (asc)" },
-    { id: "rating:desc", name: "By rating (desc)" },
+    { id: "rating:desc", name: "By rating (desc)" }
   ],
   selectedSort: 'rating:desc,title:asc',
 
