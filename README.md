@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/balinterdi/rarwe-demo.svg?branch=master)](https://travis-ci.org/balinterdi/rarwe-demo)
+[![Code Climate](https://codeclimate.com/github/balinterdi/rarwe-demo/badges/gpa.svg)](https://codeclimate.com/github/balinterdi/rarwe-demo)
 
 Rock & Roll with Ember.js - Demo version
 ========================================
