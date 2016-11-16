@@ -33,8 +33,7 @@ export default Ember.Route.extend({
       });
       song.save().then(function() {
         controller.set('newTitle', '');
-      })
-      ['catch'](function(error) {
+      }).catch(function(error) {
         console.error(error);
       });
     },
