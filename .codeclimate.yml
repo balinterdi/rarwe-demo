@@ -27,3 +27,5 @@ ratings:
 exclude_paths:
 - config/
 - tests/
+- css/
+- comps/
