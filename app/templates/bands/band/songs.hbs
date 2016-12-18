@@ -1,27 +1,27 @@
 {{#if canCreateSong}}
-<div class="list-group-item">
-    {{input type="text" class="new-band" placeholder=newSongPlaceholder value=newTitle insert-newline="createSong" }}
-    <div class="row song-filter-dropdown" >
-    <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}} disabled={{disabled}}>Add</button>
-    <select id="song-sorting-select" class="form-control pull-right song-filter-item "  onchange={{action (mut selectedSort) value="target.value"}}>
-      {{#each sortOptions as |sortOption|}}
-        <option value={{sortOption.id}} selected={{eq selectedSort sortOption.id}}>{{sortOption.name}}</option>
-      {{/each}}
-    </select>
-    </div>
-</div>
+  <div class="list-group-item">
+      {{input type="text" class="new-band" placeholder=newSongPlaceholder value=newTitle insert-newline="createSong" }}
+      <div class="row song-filter-dropdown" >
+      <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}} disabled={{disabled}}>Add</button>
+      <select id="song-sorting-select" class="form-control pull-right song-filter-item "  onchange={{action (mut selectedSort) value="target.value"}}>
+        {{#each sortOptions as |sortOption|}}
+          <option value={{sortOption.id}} selected={{eq selectedSort sortOption.id}}>{{sortOption.name}}</option>
+        {{/each}}
+      </select>
+      </div>
+  </div>
 {{/if}}
 {{#each sortedSongs as |song|}}
-<div class="list-group-item song">
-  {{song.title}}
-  {{star-rating item=song rating=song.rating maxRating=5 setAction="setRating"}}
-</div>
-{{else}}
-{{#unless canCreateSong}}
-<div class="list-group-item empty-list">
-  <div class="empty-message">
-    There are no {{model.name}} songs. Why don't you <a href="#" {{action "enableSongCreation"}}>create one?</a>
+  <div class="list-group-item song">
+    {{song.title}}
+    {{star-rating item=song rating=song.rating maxRating=5 setAction="setRating"}}
   </div>
-</div>
-{{/unless}}
+{{else}}
+  {{#unless canCreateSong}}
+    <div class="list-group-item empty-list">
+      <div class="empty-message">
+        There are no {{model.name}} songs. Why don't you <a href="#" {{action "enableSongCreation"}}>create one?</a>
+      </div>
+    </div>
+  {{/unless}}
 {{/each}}
