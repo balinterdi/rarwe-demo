@@ -1,9 +1,9 @@
 {{#if canCreateSong}}
 <div class="list-group-item">
     {{input type="text" class="new-band" placeholder=newSongPlaceholder value=newTitle insert-newline="createSong" }}
-    <div class="row" style="display: -webkit-inline-box;">
+    <div class="row song-filter-dropdown" >
     <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}} disabled={{disabled}}>Add</button>
-    <select id="song-sorting-select" class="form-control pull-right" style="margin-left: 8px" onchange={{action (mut selectedSort) value="target.value"}}>
+    <select id="song-sorting-select" class="form-control pull-right song-filter-item "  onchange={{action (mut selectedSort) value="target.value"}}>
       {{#each sortOptions as |sortOption|}}
         <option value={{sortOption.id}} selected={{eq selectedSort sortOption.id}}>{{sortOption.name}}</option>
       {{/each}}

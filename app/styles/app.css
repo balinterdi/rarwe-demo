@@ -82,3 +82,11 @@ html, body {
 #song-sorting-select {
   width: inherit;
 }
+
+.song-filter-dropdown{
+  display: -webkit-inline-box;
+}
+
+.song-filter-item{
+  margin-left:8px;
+}
