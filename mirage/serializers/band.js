@@ -4,7 +4,7 @@ export default ApplicationSerializer.extend({
   links(band) {
     return {
       songs: {
-        related: `/api/bands/${band.id}/songs`
+        related: `/bands/${band.id}/songs`
       }
     };
   }

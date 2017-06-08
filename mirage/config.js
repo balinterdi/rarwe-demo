@@ -12,7 +12,7 @@ export default function() {
   // this.namespace = '';    // make this `api`, for example, if your API is namespaced
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
-  this.namespace = '/api';
+  // this.namespace = '/api';
   /*
     Shorthand cheatsheet:
 
@@ -31,12 +31,6 @@ export default function() {
   });
 
   this.post('/songs');
-  this.put('/songs/:id', function(schema, request) {
-    let id = request.params.id;
-    let attrs = JSON.parse(request.requestBody).song;
-
-    delete attrs.band;
-
-    return schema.songs.find(id).update(attrs);
-  });
+  this.put('/songs/:id');
+  this.patch('/songs/:id');
 }

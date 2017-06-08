@@ -21,9 +21,7 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
-    'ember-cli-mirage': {
-      enabled: false,
-    },
+    apiHost: '',
     fastboot: {
       hostWhitelist: ['demo.rockandrollwithemberjs.com', 'rarwe-demo.herokuapp.com', /^localhost:\d+$/]
     }
@@ -35,22 +33,17 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.apiHost = 'http://json-api.rockandrollwithemberjs.com'
   }
 
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
-    ENV.apiNamespace = '/api';
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-    ENV['ember-cli-mirage'] = {
-      enabled: true
-    };
   }
 
   if (environment === 'production') {
