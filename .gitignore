@@ -17,3 +17,7 @@ npm-debug.log*
 testem.log
 
 .env.deploy.*
+
+// VSCode
+typings/
+jsconfig.json
