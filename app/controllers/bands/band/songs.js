@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   newTitle: '',
+  songToDelete: null,
+
   sortOptions: [
     { id: "rating:desc,title:asc", name: "Best" },
     { id: "title:asc", name: "By title (asc)" },
@@ -27,14 +29,28 @@ export default Ember.Controller.extend({
     return this.get('songCreationStarted') || this.get('model.songs.length');
   }),
 
+  disabled: Ember.computed.empty('newTitle'),
+
   actions: {
     enableSongCreation() {
       this.set('songCreationStarted', true);
-    }
+    },
+
+    setSongToDelete(song) {
+      this.set('songToDelete', song);
+    },
+
+    cancelDeletingSong() {
+      this.set('songToDelete', null);
+    },
+
+    deleteSong(song) {
+      return song.destroyRecord()
+        .then(() => {
+          this.set('songToDelete', null);
+        });
+    },
   },
 
-  disabled: Ember.computed('newTitle', function() {
-    return Ember.isEmpty(this.get('newTitle'));
-  })
 });
 

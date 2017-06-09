@@ -90,3 +90,12 @@ html, body {
 .song-filter-item{
   margin-left:8px;
 }
+
+.song-delete-action {
+  display: none;
+}
+
+.song:hover .song-delete-action {
+  display: inline-block;
+  cursor: pointer;
+}
