@@ -14,7 +14,7 @@
 {{#each sortedSongs as |song|}}
   <div class="list-group-item song">
     {{song.title}}
-    <span class="song-delete-action glyphicon glyphicon-trash" {{action 'setSongToDelete' song}}></span>
+    <span class="song-delete-action glyphicon glyphicon-trash" {{action (action (mut songToDelete) song)}}></span>
     {{star-rating item=song rating=song.rating maxRating=5 setAction="setRating"}}
   </div>
 {{else}}
@@ -36,6 +36,6 @@
   closeButton=true
   fade=false
   onSubmit=(action "deleteSong" songToDelete)
-  onHide=(action "cancelDeletingSong")}}
+  onHide=(action (mut songToDelete) null)}}
   You're about to delete {{songToDelete.title}}. Are you sure?
 {{/bs-modal-simple}}

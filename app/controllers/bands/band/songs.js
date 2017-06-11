@@ -36,14 +36,6 @@ export default Ember.Controller.extend({
       this.set('songCreationStarted', true);
     },
 
-    setSongToDelete(song) {
-      this.set('songToDelete', song);
-    },
-
-    cancelDeletingSong() {
-      this.set('songToDelete', null);
-    },
-
     deleteSong(song) {
       return song.destroyRecord()
         .then(() => {
