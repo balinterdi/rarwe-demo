@@ -1,15 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  fastboot: Ember.inject.service(),
-
-  afterModel() {
-    if (this.get('fastboot.isFastBoot')) {
-      let band = this.modelFor('bands.band');
-      return band.get('songs');
-    }
-  },
-
   resetController(controller) {
     controller.setProperties({
       newTitle: '',

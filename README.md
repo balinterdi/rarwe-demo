@@ -25,7 +25,6 @@ version) and contain several of the features the full app has.
   and destroyed on reload.
 * It strives to show idiomatic Ember and use ES2015 features, like
   destructuring and `let`.
-* It is Fastboot enabled and can thus even render without javascript. Try `curl http://demo.rockandrollwithemberjs.com/bands`
 * It is deployed on Heroku.
 
 ### Found a bug?

@@ -22,9 +22,6 @@ module.exports = function(environment) {
       // when it is created
     },
     apiHost: '',
-    fastboot: {
-      hostWhitelist: ['demo.rockandrollwithemberjs.com', 'rarwe-demo.herokuapp.com', /^localhost:\d+$/]
-    }
   };
 
   if (environment === 'development') {
