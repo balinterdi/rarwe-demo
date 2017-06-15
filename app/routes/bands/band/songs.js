@@ -22,10 +22,8 @@ export default Ember.Route.extend({
         title: controller.get('newTitle'),
         band: band
       });
-      song.save().then(function() {
+      return song.save().then(function() {
         controller.set('newTitle', '');
-      }).catch(function(error) {
-        console.error(error);
       });
     },
 

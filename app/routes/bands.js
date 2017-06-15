@@ -15,11 +15,9 @@ export default Ember.Route.extend({
       let band = this.store.createRecord('band', {
         name: controller.get('newName')
       });
-      band.save().then(function() {
+      return band.save().then(function() {
         controller.set('newName', '');
         route.transitionTo('bands.band.songs', band);
-      }).catch(function(error) {
-        console.error(error);
       });
     }
   }
