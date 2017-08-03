@@ -6,10 +6,12 @@
         disabled={{disabled}}>Add</button>
     </div>
     {{#each model as |band|}}
-      {{#link-to "bands.band.songs" band class="list-group-item band-link"}}
+    <a href={{href-to 'bands.band.songs' band.id}}
+      class="list-group-item band-link
+      {{if (is-active 'bands.band.songs' band.id) 'active'}}">
         {{band.name}}
         <span class="pointer glyphicon glyphicon-chevron-right"></span>
-      {{/link-to}}
+      </a>
     {{/each}}
   </div>
 </div>
